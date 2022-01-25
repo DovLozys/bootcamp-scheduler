@@ -1,0 +1,28 @@
+.body {
+  background-color: lightgray;
+  align-items: center;
+}
+
+.main-display {
+  text-align: center;
+  align-items: center;
+}
+
+.main-display h1 {
+  font-weight: 900;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.main-display h2 {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 20px;
+}
+
+.main-display p {
+  padding: 10px;
+  font-weight: bold;
+}
+
+#upcoming-event {
+  margin-left: 60px;
+}

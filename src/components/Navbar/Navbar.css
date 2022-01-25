@@ -1,0 +1,50 @@
+/* responsive design
+  mobile dimensions: 482x800
+} */
+
+nav > p {
+  display: inline;
+  color: rgb(255, 255, 255);
+  font-weight: 600;
+  font-size: 1.3em;
+  letter-spacing: 0.7px;
+}
+
+nav {
+  background-color: #d11403;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.logo {
+  width: 75px;
+  height: 50px;
+}
+
+.logo:hover {
+  cursor: pointer;
+}
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+}
+
+.menu-icon {
+  width: 40px;
+  height: 40px;
+}
+.menu-icon:hover {
+  cursor: pointer;
+}
+
+.default-user {
+  width: 40px;
+  height: 40px;
+}
+
+.default-user:hover {
+  cursor: pointer;
+}
