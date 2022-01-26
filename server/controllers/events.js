@@ -1,5 +1,5 @@
 import selectData from "../db/scripts/selectData.js";
-import query from "../db/index.js";
+import db from "../db/connection.js";
 
 async function getAllEvents(req, res) {
   const events = await selectData();
@@ -11,10 +11,10 @@ async function getAllEvents(req, res) {
   });
 }
 
-// will have the rest of get queries here, use query() for sending SQL to db
+// will have the rest of get queries here, use db.query() for sending SQL to db
 
 async function getUpcomingEvents(req, res) {
-  const data = await query("SELECT * FROM events ORDER BY id ASC LIMIT $1;", [
+  const data = await db.query("SELECT * FROM events ORDER BY id ASC LIMIT $1;", [
     Number(req.params.count),
   ]);
   console.log(req.params.count);
@@ -28,7 +28,7 @@ async function getUpcomingEvents(req, res) {
 // will create en event
 
 async function createEvent(req, res) {
-  const data = await query(
+  const data = await db.query(
     "INSERT INTO events (event_name, event_description, event_date, event_start, event_duration, event_category) VALUES ($1, $2, $3, $4, $5, $6); ",
     [
       req.body.event_name,
@@ -48,7 +48,7 @@ async function createEvent(req, res) {
 // will delete an event by id
 
 async function deleteEvent(req, res) {
-  const data = await query(`DELETE FROM events WHERE id = $1;`, [
+  const data = await db.query(`DELETE FROM events WHERE id = $1;`, [
     Number(req.params.id),
   ]);
   res.json({
@@ -60,7 +60,7 @@ async function deleteEvent(req, res) {
 // will get an event by id
 
 async function getEvent(req, res) {
-  const data = await query(`SELECT * FROM events WHERE id = $1;`, [
+  const data = await db.query(`SELECT * FROM events WHERE id = $1;`, [
     Number(req.params.id),
   ]);
   res.json({
@@ -71,7 +71,7 @@ async function getEvent(req, res) {
 }
 
 async function updateEvent(req, res) {
-  const data = await query(
+  const data = await db.query(
     `UPDATE events SET event_description = $1 WHERE id = $2 RETURNING *;`,
     [req.body.event_description, Number(req.params.id)]
   );

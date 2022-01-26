@@ -1,8 +1,8 @@
-import query from "../db";
+import db from "../db/connection.js";
 
 async function getProfileHistory(req, res) {
   console.log("getting profile data");
-  const data = await query("GET * FROM profiles WHERE profile_name = $1;", [
+  const data = await db.query("GET * FROM profiles WHERE profile_name = $1;", [
     req.params.name,
   ]);
 
@@ -14,7 +14,7 @@ async function getProfileHistory(req, res) {
 }
 
 async function deleteProfileHistory(req, res) {
-  const data = await query("DELETE FROM profiles WHERE profile_name = $1;", [
+  const data = await db.query("DELETE FROM profiles WHERE profile_name = $1;", [
     req.params.name,
   ]);
 

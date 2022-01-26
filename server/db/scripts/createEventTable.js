@@ -1,8 +1,8 @@
-import db from '../index.js';
+import db from '../connection.js';
 import { dummyProfile } from './dummyData.js';
 
 function createEventTable() {
-  return db.query(
+  db.query(
     'CREATE TABLE IF NOT EXISTS events (id SERIAL PRIMARY KEY, event_name TEXT, event_description TEXT,event_date TEXT, event_start TEXT, event_duration TEXT, event_category TEXT);'
   );
 }
