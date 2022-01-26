@@ -1,7 +1,7 @@
-import db from '../connection.js';
+import {pool} from '../connection.js';
 
 async function deleteData() {
-    await db.query('DELETE FROM events;');
+    await pool.query('DELETE FROM events;');
 }
 
 deleteData();

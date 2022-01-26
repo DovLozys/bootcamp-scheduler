@@ -1,7 +1,7 @@
-import db from '../db/connection.js';
+import {pool} from '../db/connection.js';
 
 function getAllEvents() {
-    const result = db.query('SELECT * FROM events');
+    const result = pool.query('SELECT * FROM events');
 
     return result.rows;
 }

@@ -1,7 +1,9 @@
-import db from '../connection.js';
+import {pool} from '../connection.js';
 
-export default async function selectData() {
-  const data = await db.query('SELECT * FROM events ORDER BY id ASC;');
+async function selectData() {
+  const data = await pool.query('SELECT * FROM events ORDER BY id ASC;');
 
   return data;
 }
+
+export {selectData};

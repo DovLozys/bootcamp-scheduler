@@ -1,6 +1,6 @@
 import express from "express";
-import eventRoutes from "./routes/events.js";
 import cors from "cors";
+import {eventRouter} from "./routes/events.js";
 
 const app = express();
 
@@ -11,7 +11,7 @@ app.get("/", (req, res) => {
   res.send("Events App");
 });
 
-app.use("/api/v1/events", eventRoutes);
+app.use("/api/v1/events", eventRouter);
 
 // app.get('/api/v1/events')             - get all upcoming events
 // app.get('/api/v1/events/:count')     - get next events

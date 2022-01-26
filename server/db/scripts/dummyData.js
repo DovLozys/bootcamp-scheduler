@@ -1,4 +1,4 @@
-const dummyData = [
+const dummyEventArr = [
   {
     name: 'Event one',
     description: 'None',
@@ -33,27 +33,27 @@ const dummyData = [
   },
 ];
 
-export default dummyData;
-
 // const dummyProfile = [
-//   {
-//     profile_name: "loyal_bob",
-//     event_name: "loyal guys only club",
-//     event_date: "2022-01-21",
-//     event_start: "00:00",
-//   },
-//   {
-//     profile_name: "loyal_bob",
-//     event_name: "hanging out with my uncle club",
-//     event_date: "2022-01-23",
-//     event_start: "00:00",
-//   },
-//   {
-//     profile_name: "loyal_bob",
-//     event_name: "stacys cruisin chubbys club",
-//     event_date: "2022-01-24",
-//     event_start: "00:00",
-//   },
-// ];
-
-// export { dummyProfile };
+  //   {
+    //     profile_name: "loyal_bob",
+    //     event_name: "loyal guys only club",
+    //     event_date: "2022-01-21",
+    //     event_start: "00:00",
+    //   },
+    //   {
+      //     profile_name: "loyal_bob",
+      //     event_name: "hanging out with my uncle club",
+      //     event_date: "2022-01-23",
+      //     event_start: "00:00",
+      //   },
+      //   {
+        //     profile_name: "loyal_bob",
+        //     event_name: "stacys cruisin chubbys club",
+        //     event_date: "2022-01-24",
+        //     event_start: "00:00",
+        //   },
+        // ];
+        
+        // export { dummyProfile };
+        
+export {dummyEventArr};
