@@ -1,11 +1,9 @@
 import React from "react";
-
-import DateAndTime from "../DateAndTime";
-import MyCalendar from "../MyCalendar";
-import DisplayUpcomingEvents from "../DisplayUpcomingEvents";
-
 import "./mainContent.css";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
+import {DateAndTime} from "../DateAndTime";
+import DisplayUpcomingEvents from "../DisplayUpcomingEvents";
+import MyCalendar from "../MyCalendar";
 
 export default function MainContent() {
   return (

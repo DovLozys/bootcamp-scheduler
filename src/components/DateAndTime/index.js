@@ -1,30 +1,14 @@
-import React, { useState } from "react";
+import React, {useState, useEffect} from 'react';
 
-export default function DateAndTime() {
-  const [dateTime, setDateTime] = useState({});
+function DateAndTime() {
+  const [dateTime, setDateTime] = useState(new Date());
 
-  setInterval(() => {
-    const today = new Date();
-    const date =
-      today.getFullYear() +
-      "-" +
-      (today.getMonth() + 1) +
-      "-" +
-      today.getDate();
-    const time =
-      today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    const dateTimeObj = { date: date, time: time };
+  useEffect(() => {
+    const timer = setInterval(() => { setDateTime(new Date()); }, 1000);
+    return () => { clearInterval(timer); };
+  }, []);
 
-    setDateTime(dateTimeObj);
-  }, 1000);
-
-  return (
-    <section>
-      <h4>
-        {dateTime.date}
-        <br />
-        {dateTime.time}
-      </h4>
-    </section>
-  );
+  return <h4>{dateTime.toUTCString()}</h4>;
 }
+
+export {DateAndTime};
