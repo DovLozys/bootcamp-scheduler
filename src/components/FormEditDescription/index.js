@@ -1,6 +1,6 @@
-import React, {useState} from "react";
-import "./FormEditDescription.css";
-import updateDescription from "../../services/EventApi";
+import React, {useState} from 'react';
+import './FormEditDescription.css';
+import {updateEventDescription} from '../../services/EventApi.js';
 
 function FormEditDescription(props) {
     const [description, setDescription] = useState(props.event_description);
@@ -16,19 +16,19 @@ function FormEditDescription(props) {
 
     function handleSubmit(event) {
         event.preventDefault();
-        updateDescription(props.event_id, description);
+        updateEventDescription(props.event_id, description);
     }
 
     return(
         <form onSubmit={handleSubmit}>
-            <button type="button" className="edit-data-button" onClick={toggleInput}>Edit</button>
+            <button type='button' className='edit-data-button' onClick={toggleInput}>Edit</button>
             <br />
-            <div className={inputHidden ? "hidden" : ""}>
-                <input id="datainput" onChange={handleChange} value={description} />
-                <button type="submit" id="databutton">Submit</button>
+            <div className={inputHidden ? 'hidden' : ''}>
+                <input id='datainput' onChange={handleChange} value={description} />
+                <button type='submit' id='databutton'>Submit</button>
             </div>
         </form>
     );
 }
 
-export default FormEditDescription;
+export {FormEditDescription};

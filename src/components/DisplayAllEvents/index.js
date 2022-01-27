@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import './DisplayAllEvents.css';
 import Navbar from '../Navbar';
 import {DeleteEventButton} from '../DeleteEventButton';
-import FormEditDescription from '../FormEditDescription';
+import {FormEditDescription} from '../FormEditDescription';
 
 function DisplayAllEvents() {
     const [events, setEvents] = useState([]);
