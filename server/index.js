@@ -1,25 +1,16 @@
-import express from "express";
-import cors from "cors";
-import {eventRouter} from "./routes/events.js";
+import express from 'express';
+import cors from 'cors';
+import {eventRouter} from './routes/events.js';
 
 const app = express();
+const port = process.env.PORT || 5500;
 
 app.use(express.json());
 app.use(cors());
+app.use('/api/v1/events', eventRouter);
 
-app.get("/", (req, res) => {
-  res.send("Events App");
+app.get('/', (req, res) => {
+    res.send('Events App API');
 });
 
-app.use("/api/v1/events", eventRouter);
-
-// app.get('/api/v1/events')             - get all upcoming events
-// app.get('/api/v1/events/:count')     - get next events
-
-// app.patch('/api/v1/tasks/:id')   - edit card
-// app.delete('/api/v1/tasks/:id')  - delete task
-// // app.post('/api/v1/events')        - create a new events
-
-const PORT = process.env.PORT || 5500;
-
-app.listen(PORT, console.log(`server is listening on port ${PORT}...`));
+app.listen(port, console.log(`Server listening on port ${port}`));

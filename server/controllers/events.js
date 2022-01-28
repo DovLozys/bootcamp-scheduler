@@ -11,8 +11,6 @@ async function getAllEvents(req, res) {
   });
 }
 
-// will have the rest of get queries here, use pool.query() for sending SQL to db
-
 async function getUpcomingEvents(req, res) {
   const data = await pool.query('SELECT * FROM events ORDER BY id ASC LIMIT $1;', [
     Number(req.params.count),
@@ -24,8 +22,6 @@ async function getUpcomingEvents(req, res) {
     payload: data,
   });
 }
-
-// will create en event
 
 async function createEvent(req, res) {
   const data = await pool.query(
@@ -45,8 +41,6 @@ async function createEvent(req, res) {
   });
 }
 
-// will delete an event by id
-
 async function deleteEvent(req, res) {
   const data = await pool.query('DELETE FROM events WHERE id = $1;', [
     Number(req.params.id),
@@ -56,8 +50,6 @@ async function deleteEvent(req, res) {
     message: 'event removed',
   });
 }
-
-// will get an event by id
 
 async function getEvent(req, res) {
   const data = await pool.query('SELECT * FROM events WHERE id = $1;', [
