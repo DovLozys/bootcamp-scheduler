@@ -1,12 +1,12 @@
-import {selectData} from "../db/scripts/selectData.js";
-import {pool} from "../db/connection.js";
+import {pool} from '../db/connection.js';
+import {queryAllEvents} from '../models/events.js';
 
 async function getAllEvents(req, res) {
-  const events = await selectData();
+  const events = await queryAllEvents();
 
   res.json({
     success: true,
-    message: "all events",
+    message: 'all events',
     payload: events,
   });
 }
@@ -14,13 +14,13 @@ async function getAllEvents(req, res) {
 // will have the rest of get queries here, use pool.query() for sending SQL to db
 
 async function getUpcomingEvents(req, res) {
-  const data = await pool.query("SELECT * FROM events ORDER BY id ASC LIMIT $1;", [
+  const data = await pool.query('SELECT * FROM events ORDER BY id ASC LIMIT $1;', [
     Number(req.params.count),
   ]);
   console.log(req.params.count);
   res.json({
     success: true,
-    message: "all events",
+    message: 'all events',
     payload: data,
   });
 }
@@ -29,7 +29,7 @@ async function getUpcomingEvents(req, res) {
 
 async function createEvent(req, res) {
   const data = await pool.query(
-    "INSERT INTO events (event_name, event_description, event_date, event_start, event_duration, event_category) VALUES ($1, $2, $3, $4, $5, $6); ",
+    'INSERT INTO events (event_name, event_description, event_date, event_start, event_duration, event_category) VALUES ($1, $2, $3, $4, $5, $6); ',
     [
       req.body.event_name,
       req.body.event_description,
@@ -41,44 +41,44 @@ async function createEvent(req, res) {
   );
   res.json({
     success: true,
-    message: "event added",
+    message: 'event added',
   });
 }
 
 // will delete an event by id
 
 async function deleteEvent(req, res) {
-  const data = await pool.query(`DELETE FROM events WHERE id = $1;`, [
+  const data = await pool.query('DELETE FROM events WHERE id = $1;', [
     Number(req.params.id),
   ]);
   res.json({
     success: true,
-    message: `event removed`,
+    message: 'event removed',
   });
 }
 
 // will get an event by id
 
 async function getEvent(req, res) {
-  const data = await pool.query(`SELECT * FROM events WHERE id = $1;`, [
+  const data = await pool.query('SELECT * FROM events WHERE id = $1;', [
     Number(req.params.id),
   ]);
   res.json({
     success: true,
-    message: `found event`,
+    message: 'found event',
     payload: data.rows,
   });
 }
 
 async function updateEvent(req, res) {
   const data = await pool.query(
-    `UPDATE events SET event_description = $1 WHERE id = $2 RETURNING *;`,
+    'UPDATE events SET event_description = $1 WHERE id = $2 RETURNING *;',
     [req.body.event_description, Number(req.params.id)]
   );
 
   res.json({
     success: true,
-    message: `event updated`,
+    message: 'event updated',
     payload: data.rows,
   });
 }

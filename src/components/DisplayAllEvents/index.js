@@ -15,7 +15,7 @@ function DisplayAllEvents() {
         const res = await fetch('http://localhost:5500/api/v1/events/');
         const response = await res.json();
 
-        setEvents(response.payload.rows);
+        setEvents(response.payload);
     }
 
     return (
