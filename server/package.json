@@ -8,7 +8,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node -r dotenv/config ./index.js",
     "createtable": "node -r dotenv/config ./db/scripts/createEventTable.js",
-    "insertdata": "node -r dotenv/config ./db/scripts/populateEventTable.js"
+    "insertdata": "node -r dotenv/config ./db/scripts/populateEventTable.js",
+    "selectdata": "node -r dotenv/config ./db/scripts/selectData.js"
   },
   "author": "",
   "license": "ISC",
