@@ -1,13 +1,13 @@
-const url = '';
+const url = 'http://localhost:5500/api/v1/events/';
 
 async function deleteEvent(id) {
-    await fetch('http://localhost:5500/api/v1/events/' + id, {
+    await fetch(url + id, {
         method: 'DELETE',
     });
 }
 
 async function updateEventDescription(id, description) {
-    await fetch('http://localhost:5500/api/v1/events/' + id, {
+    await fetch(url + id, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
