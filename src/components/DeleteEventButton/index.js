@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import './DeleteEventButton.css';
-import {deleteEvent} from '../../services/EventApi.js';
+import { deleteEvent } from '../../services/EventApi.js';
 
 function DeleteEventButton(props) {
     const [id] = useState(props.event_id);
@@ -12,4 +12,4 @@ function DeleteEventButton(props) {
     return <button onClick={handleClick} className='delete-data-button'>Delete event</button>;
 }
 
-export {DeleteEventButton};
+export { DeleteEventButton };

@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import './FormEditDescription.css';
-import {updateEventDescription} from '../../services/EventApi.js';
+import { updateEventDescription } from '../../services/EventApi.js';
 
 function FormEditDescription(props) {
     const [description, setDescription] = useState(props.event_description);
@@ -31,4 +31,4 @@ function FormEditDescription(props) {
     );
 }
 
-export {FormEditDescription};
+export { FormEditDescription };

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 
 function DateAndTime() {
   const [dateTime, setDateTime] = useState(new Date());
@@ -11,4 +11,4 @@ function DateAndTime() {
   return <h4>{dateTime.toUTCString()}</h4>;
 }
 
-export {DateAndTime};
+export { DateAndTime };

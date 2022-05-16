@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import './DisplayAllEvents.css';
 import Navbar from '../Navbar';
-import {DeleteEventButton} from '../DeleteEventButton';
-import {FormEditDescription} from '../FormEditDescription';
+import { DeleteEventButton } from '../DeleteEventButton';
+import { FormEditDescription } from '../FormEditDescription';
 
 function DisplayAllEvents() {
     const [events, setEvents] = useState([]);
@@ -42,4 +42,4 @@ function DisplayAllEvents() {
     );
 }
 
-export {DisplayAllEvents};
+export { DisplayAllEvents };

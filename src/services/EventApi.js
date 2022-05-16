@@ -16,4 +16,4 @@ async function updateEventDescription(id, description) {
     });
 }
 
-export {updateEventDescription, deleteEvent};
+export { updateEventDescription, deleteEvent };

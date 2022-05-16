@@ -1,8 +1,8 @@
-import {Routes, Route} from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import './App.css';
 import HomePage from '../HomePage';
 import HostEventPage from '../HostEventPage';
-import {DisplayAllEvents} from '../DisplayAllEvents';
+import { DisplayAllEvents } from '../DisplayAllEvents';
 import ProfilePage from '../ProfilePage';
 
 function App() {
@@ -16,4 +16,4 @@ function App() {
     );
 }
 
-export {App};
+export { App };
