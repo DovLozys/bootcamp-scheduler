@@ -1,22 +1,24 @@
-import React from "react";
-import "./mainContent.css";
-import { Link } from "react-router-dom";
-import { DateAndTime } from "../DateAndTime";
-import DisplayUpcomingEvents from "../DisplayUpcomingEvents";
-import MyCalendar from "../MyCalendar";
+import React from 'react';
+
+import { Link } from 'react-router-dom';
+import { DateAndTime } from '../DateAndTime';
+import DisplayUpcomingEvents from '../DisplayUpcomingEvents';
+import MyCalendar from '../MyCalendar';
+
+import './mainContent.css';
 
 export default function MainContent() {
   return (
-    <section className="main-display">
+    <section className='main-display'>
       <h2>Clan Optimist's upcoming...</h2>
-      <div id="upcoming-event">
-        <Link to="all-events">
-          <DisplayUpcomingEvents count="1" />
+      <div id='upcoming-event'>
+        <Link to='all-events'>
+          <DisplayUpcomingEvents count='1' />
         </Link>
       </div>
 
       <DateAndTime />
-      <section className="calendar-placement">
+      <section className='calendar-placement'>
         <MyCalendar />
       </section>
       {/* <p>
@@ -26,7 +28,7 @@ export default function MainContent() {
       </p> */}
       <p>
         Optimist's Flexible, Social and Professional event manager. Never worry
-        about missing a deadline.{" "}
+        about missing a deadline.
       </p>
     </section>
   );

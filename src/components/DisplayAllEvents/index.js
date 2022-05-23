@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import './DisplayAllEvents.css';
-import Navbar from '../Navbar';
+
 import { DeleteEventButton } from '../DeleteEventButton';
 import { FormEditDescription } from '../FormEditDescription';
+import Navbar from '../Navbar';
+
+import './DisplayAllEvents.css';
 
 function DisplayAllEvents() {
     const [events, setEvents] = useState([]);
@@ -10,7 +12,8 @@ function DisplayAllEvents() {
     useEffect(() => {
         getAllEvents();
     }, []);
-
+    
+    // TODO: move function declaration into useEffect?
     async function getAllEvents() {
         const res = await fetch('http://localhost:5500/api/v1/events/');
         const response = await res.json();

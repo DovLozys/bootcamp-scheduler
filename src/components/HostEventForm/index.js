@@ -1,5 +1,6 @@
-import React from "react";
-import "./hostEventForm.css";
+import React from 'react';
+
+import './hostEventForm.css';
 
 export default function HostEventForm() {
   function diff(eventStartTime, eventEndTime) {

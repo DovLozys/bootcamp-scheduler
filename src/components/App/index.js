@@ -1,9 +1,11 @@
 import { Routes, Route } from 'react-router-dom';
-import './App.css';
+
+import { DisplayAllEvents } from '../DisplayAllEvents';
 import HomePage from '../HomePage';
 import HostEventPage from '../HostEventPage';
-import { DisplayAllEvents } from '../DisplayAllEvents';
 import ProfilePage from '../ProfilePage';
+
+import './App.css';
 
 function App() {
     return (

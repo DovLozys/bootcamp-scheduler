@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import './FormEditDescription.css';
+
 import { updateEventDescription } from '../../services/EventApi.js';
+
+import './FormEditDescription.css';
 
 function FormEditDescription(props) {
     const [description, setDescription] = useState(props.event_description);

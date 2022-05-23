@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import './DeleteEventButton.css';
+
 import { deleteEvent } from '../../services/EventApi.js';
+
+import './DeleteEventButton.css';
 
 function DeleteEventButton(props) {
     const [id] = useState(props.event_id);
