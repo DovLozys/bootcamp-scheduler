@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function UserProfile({ name }) {
   const [profile, setProfile] = useState([]);
@@ -6,7 +6,7 @@ export default function UserProfile({ name }) {
   useEffect(() => {
     fetchProfile(name);
   }, [name]);
-  
+
   // TODO: move function declaration into useEffect?
   async function fetchProfile(name) {
     let data = await fetch(

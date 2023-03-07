@@ -1,11 +1,11 @@
 import { Routes, Route } from 'react-router-dom';
 
-import { DisplayAllEvents } from '../DisplayAllEvents';
+import DisplayAllEvents from '../DisplayAllEvents';
 import HomePage from '../HomePage';
 import HostEventPage from '../HostEventPage';
 import ProfilePage from '../ProfilePage';
 
-function App() {
+export default function App() {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
@@ -15,5 +15,3 @@ function App() {
     </Routes>
   );
 }
-
-export { App };

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 import './displayUpcomingEvents.css';
 
@@ -12,7 +12,7 @@ function DisplayUpcomingEvents(props) {
   // TODO: move function declaration into useEffect?
   async function getUpcomingEvents(count) {
     let res = await fetch(
-      "http://localhost:5500/api/v1/events/upcomingevents/" + count
+      'http://localhost:5500/api/v1/events/upcomingevents/' + count
     );
     let response = await res.json();
 

@@ -1,11 +1,9 @@
-import React from 'react';
-
 import './hostEventForm.css';
 
 export default function HostEventForm() {
   function diff(eventStartTime, eventEndTime) {
-    eventStartTime = eventStartTime.split(":");
-    eventEndTime = eventEndTime.split(":");
+    eventStartTime = eventStartTime.split(':');
+    eventEndTime = eventEndTime.split(':');
     var eventStartTimeDate = new Date(
       0,
       0,
@@ -21,10 +19,10 @@ export default function HostEventForm() {
     var minutes = Math.floor(diff / 1000 / 60);
     if (hours < 0) hours = hours + 24;
     return (
-      (hours <= 9 ? "0" : "") +
+      (hours <= 9 ? '0' : '') +
       hours +
-      ":" +
-      (minutes <= 9 ? "0" : "") +
+      ':' +
+      (minutes <= 9 ? '0' : '') +
       minutes
     );
   }
@@ -40,11 +38,11 @@ export default function HostEventForm() {
       event_category: e.target[5].value,
     };
 
-    fetch("http://localhost:5500/api/v1/events/host-event", {
-      method: "POST",
+    fetch('http://localhost:5500/api/v1/events/host-event', {
+      method: 'POST',
       body: JSON.stringify(newEvent),
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     });
   }
