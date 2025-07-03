@@ -1,18 +1,21 @@
 import { useState, useEffect } from "react";
 
 export default function DateAndTime() {
-  const getTimeString = () => new Date().toLocaleTimeString();
+  const getDateTimeString = () => {
+    const now = new Date();
+    return now.toLocaleDateString() + " " + now.toLocaleTimeString();
+  };
 
-  const [timeString, setTimeString] = useState(getTimeString());
+  const [dateTimeString, setDateTimeString] = useState(getDateTimeString());
 
   useEffect(() => {
     let timerId;
 
     const tick = () => {
-      const newTime = getTimeString();
-      setTimeString((prev) => {
-        if (prev !== newTime) {
-          return newTime;
+      const newDateTime = getDateTimeString();
+      setDateTimeString((prev) => {
+        if (prev !== newDateTime) {
+          return newDateTime;
         }
         return prev;
       });
@@ -24,5 +27,5 @@ export default function DateAndTime() {
     return () => clearTimeout(timerId);
   }, []);
 
-  return <h4>{timeString}</h4>;
+  return <h4>{dateTimeString}</h4>;
 }
