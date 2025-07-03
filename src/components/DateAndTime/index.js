@@ -1,16 +1,28 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 export default function DateAndTime() {
-  const [dateTime, setDateTime] = useState(new Date());
+  const getTimeString = () => new Date().toLocaleTimeString();
+
+  const [timeString, setTimeString] = useState(getTimeString());
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setDateTime(new Date());
-    }, 1000);
-    return () => {
-      clearInterval(timer);
+    let timerId;
+
+    const tick = () => {
+      const newTime = getTimeString();
+      setTimeString((prev) => {
+        if (prev !== newTime) {
+          return newTime;
+        }
+        return prev;
+      });
+      timerId = setTimeout(tick, 1000 - (Date.now() % 1000));
     };
+
+    tick();
+
+    return () => clearTimeout(timerId);
   }, []);
 
-  return <h4>{dateTime.toUTCString()}</h4>;
+  return <h4>{timeString}</h4>;
 }

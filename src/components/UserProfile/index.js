@@ -21,7 +21,7 @@ export default function UserProfile({ name }) {
       <ul>
         {profile.map((el) => {
           return (
-            <li>
+            <li key={el.event_name + el.event_date}>
               {el.profile_name} {el.event_name} {el.event_start} {el.event_date}
             </li>
           );
