@@ -1,33 +1,72 @@
 .all-events-body {
   text-align: center;
+  background: #f4f6fa;
+  min-height: 100vh;
+  padding-bottom: 32px;
+}
+
+.page-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin: 32px 0 24px 0;
+  color: #222;
+  letter-spacing: 1px;
 }
 
 .flex-container {
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
+  gap: 24px;
 }
 
-.card {
-  border: 1px solid #ee8c83;
-  background-color: white;
-  box-shadow: 0 1px 3px -2px #e27c73;
-  border-radius: 5px;
-  width: 380px;
-  margin: 10px;
-  padding: 10px;
-  text-align: center;
-}
-
-.time-text {
-  font-style: italic;
-}
-
-.category-text {
-  font-weight: bold;
-}
-
-.span-span {
+.card.event-card {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  border: none;
+  width: 370px;
+  margin: 0;
+  padding: 28px 24px 20px 24px;
+  text-align: left;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  align-items: flex-start;
+  transition: box-shadow 0.2s;
+}
+.card.event-card:hover {
+  box-shadow: 0 8px 24px rgba(0,0,0,0.13);
+}
+
+.event-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #d11403;
+}
+.event-time {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 4px;
+}
+.event-duration {
+  color: #888;
+  font-size: 0.95em;
+}
+.event-category {
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: #2d7a46;
+  margin-bottom: 6px;
+}
+.event-description {
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 14px;
+}
+.event-actions {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  justify-content: flex-end;
 }

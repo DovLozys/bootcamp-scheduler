@@ -1,8 +1,24 @@
 .page-body {
-  height: 100vh;
+  min-height: 100vh;
   width: 100%;
+  background: linear-gradient(120deg, #fff 0%, #f7e6e3 100%);
 }
 
-.page-body h1 {
+.host-event-header {
   text-align: center;
+  margin-top: 36px;
+  margin-bottom: 12px;
+}
+
+.host-event-header h1 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #d11403;
+  margin-bottom: 8px;
+}
+
+.host-event-subtitle {
+  font-size: 1.1rem;
+  color: #555;
+  margin-bottom: 0;
 }

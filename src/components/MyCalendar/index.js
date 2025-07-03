@@ -10,9 +10,13 @@ export default function MyCalendar() {
 
   return (
     <section className="calendar-section">
-      <Link to="host-event">
-        <Calendar className="calendar" onChange={onChange} value={value} />
-      </Link>
+      <div className="calendar-card">
+        <h2 className="calendar-title">Event Calendar</h2>
+        <Link to="host-event" className="calendar-link">
+          <Calendar className="calendar" onChange={onChange} value={value} />
+        </Link>
+        <p className="calendar-tip">Click a date to host a new event!</p>
+      </div>
     </section>
   );
 }

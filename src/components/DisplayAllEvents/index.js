@@ -24,18 +24,19 @@ export default function DisplayAllEvents() {
   return (
     <div className="all-events-body">
       <Navbar />
-      <h1>All Events</h1>
+      <h1 className="page-title">All Events</h1>
       <div className="flex-container">
         {events.map((event) => {
           return (
-            <div className="card" key={event.id}>
-              <h2>{event.event_name}</h2>
-              <p className="time-text">
-                {event.event_date}, {event.event_start} ({event.event_duration})
+            <div className="card event-card" key={event.id}>
+              <h2 className="event-title">{event.event_name}</h2>
+              <p className="time-text event-time">
+                {event.event_date}, {event.event_start}{' '}
+                <span className="event-duration">({event.event_duration})</span>
               </p>
-              <p className="category-text">{event.event_category}</p>
-              <p>{event.event_description}</p>
-              <span className="span-span">
+              <p className="category-text event-category">{event.event_category}</p>
+              <p className="event-description">{event.event_description}</p>
+              <span className="span-span event-actions">
                 <DeleteEventButton event_id={event.id} />
                 <FormEditDescription
                   event_id={event.id}

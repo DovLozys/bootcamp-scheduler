@@ -2,7 +2,7 @@ import UserProfile from '../UserProfile';
 
 export default function ProfilePage() {
   return (
-    <section>
+    <section className="profile-page-section">
       <UserProfile name="loyal_bob" />
     </section>
   );

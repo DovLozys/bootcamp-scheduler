@@ -1,28 +1,43 @@
 .body {
-  background-color: lightgray;
+  background-color: #f4f6fa;
   align-items: center;
 }
 
 .main-display {
   text-align: center;
   align-items: center;
+  padding: 32px 0 0 0;
 }
 
-.main-display h1 {
-  font-weight: 900;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+.main-display h1, .main-display h2 {
+  font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 18px;
+  letter-spacing: 1px;
 }
 
 .main-display h2 {
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-size: 20px;
+  font-size: 1.5rem;
+  margin-top: 0;
 }
 
 .main-display p {
   padding: 10px;
-  font-weight: bold;
+  font-weight: 500;
+  color: #444;
+  font-size: 1.08rem;
+  margin: 0 auto 18px auto;
+  max-width: 500px;
 }
 
 #upcoming-event {
-  margin-left: 60px;
+  margin-left: 0;
+  margin-bottom: 18px;
+}
+
+.calendar-placement {
+  display: flex;
+  justify-content: center;
+  margin: 24px 0 0 0;
 }

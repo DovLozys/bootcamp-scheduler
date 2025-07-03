@@ -1,0 +1,46 @@
+.profile-list-container {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  margin: 32px auto;
+  padding: 32px 24px 24px 24px;
+  max-width: 500px;
+}
+.profile-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #d11403;
+  margin-bottom: 18px;
+  text-align: center;
+}
+.profile-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.profile-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 1.05rem;
+  color: #333;
+}
+.profile-list-item:last-child {
+  border-bottom: none;
+}
+.profile-event-name {
+  font-weight: 600;
+  color: #2d7a46;
+}
+.profile-event-date, .profile-event-time {
+  color: #555;
+  font-size: 0.98em;
+  margin-left: 10px;
+}
+.profile-event-desc {
+  color: #888;
+  font-size: 0.95em;
+  margin-left: 10px;
+}

@@ -10,3 +10,12 @@ body {
 .hidden {
   display: none;
 }
+
+.profile-page-section {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 60vh;
+  padding: 40px 0 0 0;
+  background: none;
+}
