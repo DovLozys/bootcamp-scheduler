@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import React, { useState, FormEvent, ChangeEvent } from 'react';
+import { EventFormData, FormErrors } from '../../types';
 import './hostEventForm.css';
 
-export default function HostEventForm() {
-  const [currentStep, setCurrentStep] = useState(1);
-  const [formData, setFormData] = useState({
+const HostEventForm: React.FC = () => {
+  const [currentStep, setCurrentStep] = useState<number>(1);
+  const [formData, setFormData] = useState<EventFormData>({
     event_name: '',
     event_description: '',
     event_date: '',
@@ -13,15 +14,15 @@ export default function HostEventForm() {
     event_location: '',
     event_capacity: ''
   });
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState<FormErrors>({});
 
-  const totalSteps = 3;
+  const totalSteps: number = 3;
 
-  function diff(eventStartTime, eventEndTime) {
-    eventStartTime = eventStartTime.split(':');
-    eventEndTime = eventEndTime.split(':');
-    var eventStartTimeDate = new Date(0, 0, 0, eventStartTime[0], eventStartTime[1], 0);
-    var endDate = new Date(0, 0, 0, eventEndTime[0], eventEndTime[1], 0);
+  function diff(eventStartTime: string, eventEndTime: string): string {
+    const startParts = eventStartTime.split(':');
+    const endParts = eventEndTime.split(':');
+    var eventStartTimeDate = new Date(0, 0, 0, parseInt(startParts[0]), parseInt(startParts[1]), 0);
+    var endDate = new Date(0, 0, 0, parseInt(endParts[0]), parseInt(endParts[1]), 0);
     var diff = endDate.getTime() - eventStartTimeDate.getTime();
     var hours = Math.floor(diff / 1000 / 60 / 60);
     diff -= hours * 1000 * 60 * 60;
@@ -32,8 +33,8 @@ export default function HostEventForm() {
     );
   }
 
-  const validateStep = (step) => {
-    const newErrors = {};
+  const validateStep = (step: number): boolean => {
+    const newErrors: FormErrors = {};
 
     if (step === 1) {
       if (!formData.event_name.trim()) {
@@ -73,7 +74,7 @@ export default function HostEventForm() {
       if (!formData.event_location.trim()) {
         newErrors.event_location = 'Event location is required';
       }
-      if (!formData.event_capacity || formData.event_capacity < 1) {
+      if (!formData.event_capacity || parseInt(formData.event_capacity) < 1) {
         newErrors.event_capacity = 'Please enter a valid capacity';
       }
     }
@@ -82,7 +83,7 @@ export default function HostEventForm() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleInputChange = (field, value) => {
+  const handleInputChange = (field: keyof EventFormData, value: string): void => {
     setFormData(prev => ({ ...prev, [field]: value }));
 
     // Clear error when user starts typing
@@ -91,17 +92,17 @@ export default function HostEventForm() {
     }
   };
 
-  const nextStep = () => {
+  const nextStep = (): void => {
     if (validateStep(currentStep)) {
       setCurrentStep(prev => Math.min(prev + 1, totalSteps));
     }
   };
 
-  const prevStep = () => {
+  const prevStep = (): void => {
     setCurrentStep(prev => Math.max(prev - 1, 1));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     if (validateStep(currentStep)) {
       const newEvent = {
@@ -144,7 +145,7 @@ export default function HostEventForm() {
     }
   };
 
-  const renderStepContent = () => {
+  const renderStepContent = (): React.ReactElement | null => {
     switch (currentStep) {
       case 1:
         return (
@@ -156,7 +157,7 @@ export default function HostEventForm() {
                 type="text"
                 placeholder="Enter a compelling event title..."
                 value={formData.event_name}
-                onChange={(e) => handleInputChange('event_name', e.target.value)}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => handleInputChange('event_name', e.target.value)}
                 className={errors.event_name ? 'error' : ''}
               />
               {errors.event_name && <span className="error-message">{errors.event_name}</span>}
@@ -167,9 +168,9 @@ export default function HostEventForm() {
               <textarea
                 id="event-desc"
                 placeholder="Describe your event in detail..."
-                rows="4"
+                rows={4}
                 value={formData.event_description}
-                onChange={(e) => handleInputChange('event_description', e.target.value)}
+                onChange={(e: ChangeEvent<HTMLTextAreaElement>) => handleInputChange('event_description', e.target.value)}
                 className={errors.event_description ? 'error' : ''}
               />
               {errors.event_description && <span className="error-message">{errors.event_description}</span>}
@@ -180,7 +181,7 @@ export default function HostEventForm() {
               <select
                 id="event-category"
                 value={formData.event_category}
-                onChange={(e) => handleInputChange('event_category', e.target.value)}
+                onChange={(e: ChangeEvent<HTMLSelectElement>) => handleInputChange('event_category', e.target.value)}
                 className={errors.event_category ? 'error' : ''}
               >
                 <option value="">Select a category</option>
@@ -203,7 +204,7 @@ export default function HostEventForm() {
                 id="event-date"
                 type="date"
                 value={formData.event_date}
-                onChange={(e) => handleInputChange('event_date', e.target.value)}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => handleInputChange('event_date', e.target.value)}
                 className={errors.event_date ? 'error' : ''}
                 min={new Date().toISOString().split('T')[0]}
               />
@@ -217,7 +218,7 @@ export default function HostEventForm() {
                   id="start-time"
                   type="time"
                   value={formData.event_start}
-                  onChange={(e) => handleInputChange('event_start', e.target.value)}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) => handleInputChange('event_start', e.target.value)}
                   className={errors.event_start ? 'error' : ''}
                 />
                 {errors.event_start && <span className="error-message">{errors.event_start}</span>}
@@ -228,7 +229,7 @@ export default function HostEventForm() {
                   id="end-time"
                   type="time"
                   value={formData.event_end}
-                  onChange={(e) => handleInputChange('event_end', e.target.value)}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) => handleInputChange('event_end', e.target.value)}
                   className={errors.event_end ? 'error' : ''}
                 />
                 {errors.event_end && <span className="error-message">{errors.event_end}</span>}
@@ -247,7 +248,7 @@ export default function HostEventForm() {
                 type="text"
                 placeholder="Enter event location or address..."
                 value={formData.event_location}
-                onChange={(e) => handleInputChange('event_location', e.target.value)}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => handleInputChange('event_location', e.target.value)}
                 className={errors.event_location ? 'error' : ''}
               />
               {errors.event_location && <span className="error-message">{errors.event_location}</span>}
@@ -259,9 +260,9 @@ export default function HostEventForm() {
                 id="event-capacity"
                 type="number"
                 placeholder="How many people can attend?"
-                min="1"
+                min={1}
                 value={formData.event_capacity}
-                onChange={(e) => handleInputChange('event_capacity', e.target.value)}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => handleInputChange('event_capacity', e.target.value)}
                 className={errors.event_capacity ? 'error' : ''}
               />
               {errors.event_capacity && <span className="error-message">{errors.event_capacity}</span>}
@@ -274,7 +275,7 @@ export default function HostEventForm() {
     }
   };
 
-  const getStepTitle = () => {
+  const getStepTitle = (): string => {
     switch (currentStep) {
       case 1: return 'Basic Information';
       case 2: return 'Date & Time';
@@ -326,4 +327,6 @@ export default function HostEventForm() {
       </form>
     </section>
   );
-}
+};
+
+export default HostEventForm;

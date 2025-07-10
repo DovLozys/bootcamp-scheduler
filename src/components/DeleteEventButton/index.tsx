@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { deleteEvent } from '../../services/EventApi.js';
+import { deleteEvent } from '../../services/EventApi';
 
 import './DeleteEventButton.css';
 

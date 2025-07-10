@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { updateEventDescription } from '../../services/EventApi.js';
+import { updateEventDescription } from '../../services/EventApi';
 
 import './FormEditDescription.css';
 

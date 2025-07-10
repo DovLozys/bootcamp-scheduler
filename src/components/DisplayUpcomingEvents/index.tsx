@@ -1,15 +1,20 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Event } from '../../types';
 
 import './displayUpcomingEvents.css';
 
-function DisplayUpcomingEvents(props) {
-  const [upcomingEvents, setUpcomingEvents] = useState([]);
+interface DisplayUpcomingEventsProps {
+  count: string;
+}
+
+const DisplayUpcomingEvents: React.FC<DisplayUpcomingEventsProps> = ({ count }) => {
+  const [upcomingEvents, setUpcomingEvents] = useState<Event[]>([]);
 
   useEffect(() => {
-    getUpcomingEvents(props.count);
-  }, []);
+    getUpcomingEvents(count);
+  }, [count]);
 
-  async function getUpcomingEvents(count) {
+  async function getUpcomingEvents(count: string): Promise<void> {
     let res = await fetch(
       'http://localhost:5500/api/v1/events/upcomingevents/' + count
     );
@@ -34,6 +39,6 @@ function DisplayUpcomingEvents(props) {
       })}
     </div>
   );
-}
+};
 
 export default DisplayUpcomingEvents;

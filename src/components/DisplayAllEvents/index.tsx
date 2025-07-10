@@ -1,18 +1,17 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { Event, SortOption } from '../../types';
 
-import DeleteEventButton from '../DeleteEventButton';
-import FormEditDescription from '../FormEditDescription';
 import Navbar from '../Navbar';
 import EventCard from '../EventCard';
 
 import './DisplayAllEvents.css';
 
-export default function DisplayAllEvents() {
-  const [events, setEvents] = useState([]);
-  const [filteredEvents, setFilteredEvents] = useState([]);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('');
-  const [sortBy, setSortBy] = useState('date');
+const DisplayAllEvents: React.FC = () => {
+  const [events, setEvents] = useState<Event[]>([]);
+  const [filteredEvents, setFilteredEvents] = useState<Event[]>([]);
+  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [selectedCategory, setSelectedCategory] = useState<string>('');
+  const [sortBy, setSortBy] = useState<SortOption>('date');
 
   useEffect(() => {
     getAllEvents();
@@ -23,19 +22,19 @@ export default function DisplayAllEvents() {
   }, [events, searchQuery, selectedCategory, sortBy]);
 
   // TODO: move function declaration into useEffect?
-  async function getAllEvents() {
+  async function getAllEvents(): Promise<void> {
     const res = await fetch('http://localhost:5500/api/v1/events/');
     const response = await res.json();
 
     setEvents(response.payload);
   }
 
-  const filterAndSortEvents = () => {
+  const filterAndSortEvents = (): void => {
     let filtered = [...events];
 
     // Filter by search query
     if (searchQuery) {
-      filtered = filtered.filter(event =>
+      filtered = filtered.filter((event: Event) =>
         event.event_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         event.event_description.toLowerCase().includes(searchQuery.toLowerCase())
       );
@@ -43,14 +42,14 @@ export default function DisplayAllEvents() {
 
     // Filter by category
     if (selectedCategory) {
-      filtered = filtered.filter(event => event.event_category === selectedCategory);
+      filtered = filtered.filter((event: Event) => event.event_category === selectedCategory);
     }
 
     // Sort events
-    filtered.sort((a, b) => {
+    filtered.sort((a: Event, b: Event) => {
       switch (sortBy) {
         case 'date':
-          return new Date(a.event_date) - new Date(b.event_date);
+          return new Date(a.event_date).getTime() - new Date(b.event_date).getTime();
         case 'name':
           return a.event_name.localeCompare(b.event_name);
         case 'category':
@@ -63,21 +62,21 @@ export default function DisplayAllEvents() {
     setFilteredEvents(filtered);
   };
 
-  const handleSearch = (query) => {
+  const handleSearch = (query: string): void => {
     setSearchQuery(query);
   };
 
-  const handleViewDetails = (event) => {
+  const handleViewDetails = (event: Event): void => {
     // TODO: Navigate to event details page
     console.log('View details for event:', event.id);
   };
 
-  const handleBookNow = (event) => {
+  const handleBookNow = (event: Event): void => {
     // TODO: Handle event booking
     console.log('Book event:', event.id);
   };
 
-  const categories = [...new Set(events.map(event => event.event_category))];
+  const categories: string[] = Array.from(new Set(events.map(event => event.event_category)));
 
   return (
     <div className="all-events-body">
@@ -100,7 +99,7 @@ export default function DisplayAllEvents() {
               className="filter-select"
             >
               <option value="">All Categories</option>
-              {categories.map(category => (
+              {categories.map((category: string) => (
                 <option key={category} value={category}>{category}</option>
               ))}
             </select>
@@ -111,7 +110,7 @@ export default function DisplayAllEvents() {
             <select
               id="sort-select"
               value={sortBy}
-              onChange={(e) => setSortBy(e.target.value)}
+              onChange={(e) => setSortBy(e.target.value as SortOption)}
               className="filter-select"
             >
               <option value="date">Date</option>
@@ -140,4 +139,6 @@ export default function DisplayAllEvents() {
       </div>
     </div>
   );
-}
+};
+
+export default DisplayAllEvents;

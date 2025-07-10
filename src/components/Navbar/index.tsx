@@ -1,5 +1,5 @@
+import React, { useState, ChangeEvent } from 'react';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
 
 import menuicon from './menu-icon.png';
 import defaultuser from './default-user.png';
@@ -7,12 +7,16 @@ import logo from './final-logo.png';
 
 import './Navbar.css';
 
-export default function Navbar({ onSearch }) {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(false); // This would come from auth context
+interface NavbarProps {
+  onSearch?: (query: string) => void;
+}
 
-  const handleSearchChange = (e) => {
+const Navbar: React.FC<NavbarProps> = ({ onSearch }) => {
+  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
+  const [isAuthenticated] = useState<boolean>(false); // This would come from auth context
+
+  const handleSearchChange = (e: ChangeEvent<HTMLInputElement>): void => {
     const query = e.target.value;
     setSearchQuery(query);
     if (onSearch) {
@@ -20,7 +24,7 @@ export default function Navbar({ onSearch }) {
     }
   };
 
-  const toggleDropdown = () => {
+  const toggleDropdown = (): void => {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
@@ -89,4 +93,6 @@ export default function Navbar({ onSearch }) {
       </nav>
     </div>
   );
-}
+};
+
+export default Navbar;

@@ -1,12 +1,12 @@
-const url = 'http://localhost:5500/api/v1/events/';
+const url: string = 'http://localhost:5500/api/v1/events/';
 
-async function deleteEvent(id) {
+async function deleteEvent(id: string): Promise<void> {
     await fetch(url + id, {
         method: 'DELETE',
     });
 }
 
-async function updateEventDescription(id, description) {
+async function updateEventDescription(id: string, description: string): Promise<void> {
     await fetch(url + id, {
         method: 'PATCH',
         headers: {

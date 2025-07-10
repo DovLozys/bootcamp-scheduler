@@ -1,3 +1,4 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
 import DateAndTime from '../DateAndTime';
 import DisplayUpcomingEvents from '../DisplayUpcomingEvents';
@@ -5,7 +6,7 @@ import MyCalendar from '../MyCalendar';
 
 import './mainContent.css';
 
-export default function MainContent() {
+const MainContent: React.FC = () => {
   return (
     <section className="main-display">
       <h2>Clan Optimist's upcoming...</h2>
@@ -30,4 +31,6 @@ export default function MainContent() {
       </p>
     </section>
   );
-}
+};
+
+export default MainContent;

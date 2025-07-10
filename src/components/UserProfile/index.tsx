@@ -1,26 +1,31 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect, ChangeEvent } from 'react';
+import { Event, UserInfo, TabType } from '../../types';
 import EventCard from '../EventCard';
 import './UserProfile.css';
 
-export default function UserProfile({ name = "User" }) {
-  const [profile, setProfile] = useState([]);
-  const [userInfo, setUserInfo] = useState({
+interface UserProfileProps {
+  name?: string;
+}
+
+const UserProfile: React.FC<UserProfileProps> = ({ name = "User" }) => {
+  const [profile, setProfile] = useState<Event[]>([]);
+  const [userInfo, setUserInfo] = useState<UserInfo>({
     name: name,
     email: '',
     bio: '',
     location: '',
     joinDate: '2024-01-01'
   });
-  const [activeTab, setActiveTab] = useState('upcoming');
-  const [isEditing, setIsEditing] = useState(false);
-  const [editData, setEditData] = useState({ ...userInfo });
+  const [activeTab, setActiveTab] = useState<TabType>('upcoming');
+  const [isEditing, setIsEditing] = useState<boolean>(false);
+  const [editData, setEditData] = useState<UserInfo>({ ...userInfo });
 
   useEffect(() => {
     fetchProfile(name);
     // TODO: Fetch user information from API
   }, [name]);
 
-  async function fetchProfile(name) {
+  async function fetchProfile(name: string): Promise<void> {
     try {
       let data = await fetch(
         'http://localhost:5500/api/v1/events/profile/' + name
@@ -33,45 +38,45 @@ export default function UserProfile({ name = "User" }) {
     }
   }
 
-  const handleEditProfile = () => {
+  const handleEditProfile = (): void => {
     setIsEditing(true);
     setEditData({ ...userInfo });
   };
 
-  const handleSaveProfile = () => {
+  const handleSaveProfile = (): void => {
     setUserInfo({ ...editData });
     setIsEditing(false);
     // TODO: Save to API
     console.log('Saving profile:', editData);
   };
 
-  const handleCancelEdit = () => {
+  const handleCancelEdit = (): void => {
     setIsEditing(false);
     setEditData({ ...userInfo });
   };
 
-  const handleInputChange = (field, value) => {
+  const handleInputChange = (field: keyof UserInfo, value: string): void => {
     setEditData(prev => ({ ...prev, [field]: value }));
   };
 
-  const getFilteredEvents = () => {
+  const getFilteredEvents = (): Event[] => {
     const now = new Date();
     const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
     switch (activeTab) {
       case 'upcoming':
-        return profile.filter(event => new Date(event.event_date) >= today);
+        return profile.filter((event: Event) => new Date(event.event_date) >= today);
       case 'past':
-        return profile.filter(event => new Date(event.event_date) < today);
+        return profile.filter((event: Event) => new Date(event.event_date) < today);
       case 'hosted':
         // TODO: Filter events hosted by the user
-        return profile.filter(event => event.host_id === userInfo.id);
+        return profile.filter((event: Event) => event.host_id === userInfo.id);
       default:
         return profile;
     }
   };
 
-  const formatDate = (dateString) => {
+  const formatDate = (dateString: string): string => {
     return new Date(dateString).toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'long'
@@ -115,7 +120,7 @@ export default function UserProfile({ name = "User" }) {
                 <input
                   type="text"
                   value={editData.name}
-                  onChange={(e) => handleInputChange('name', e.target.value)}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) => handleInputChange('name', e.target.value)}
                 />
               </div>
               <div className="form-group">
@@ -123,16 +128,16 @@ export default function UserProfile({ name = "User" }) {
                 <input
                   type="email"
                   value={editData.email}
-                  onChange={(e) => handleInputChange('email', e.target.value)}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) => handleInputChange('email', e.target.value)}
                 />
               </div>
               <div className="form-group">
                 <label>Bio:</label>
                 <textarea
                   value={editData.bio}
-                  onChange={(e) => handleInputChange('bio', e.target.value)}
+                  onChange={(e: ChangeEvent<HTMLTextAreaElement>) => handleInputChange('bio', e.target.value)}
                   placeholder="Tell us about yourself..."
-                  rows="3"
+                  rows={3}
                 />
               </div>
               <div className="form-group">
@@ -140,7 +145,7 @@ export default function UserProfile({ name = "User" }) {
                 <input
                   type="text"
                   value={editData.location}
-                  onChange={(e) => handleInputChange('location', e.target.value)}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) => handleInputChange('location', e.target.value)}
                   placeholder="City, Country"
                 />
               </div>
@@ -182,12 +187,12 @@ export default function UserProfile({ name = "User" }) {
         <div className="events-section">
           {getFilteredEvents().length > 0 ? (
             <div className="events-grid">
-              {getFilteredEvents().map((event) => (
+              {getFilteredEvents().map((event: Event) => (
                 <EventCard
                   key={event.id || event.event_name + event.event_date}
                   event={event}
-                  onViewDetails={(event) => console.log('View details:', event)}
-                  onBookNow={(event) => console.log('Book event:', event)}
+                  onViewDetails={(event: Event) => console.log('View details:', event)}
+                  onBookNow={(event: Event) => console.log('Book event:', event)}
                 />
               ))}
             </div>
@@ -205,4 +210,6 @@ export default function UserProfile({ name = "User" }) {
       </div>
     </div>
   );
-}
+};
+
+export default UserProfile;

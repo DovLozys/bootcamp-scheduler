@@ -1,3 +1,4 @@
+import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 import DisplayAllEvents from '../DisplayAllEvents';
@@ -5,7 +6,7 @@ import HomePage from '../HomePage';
 import HostEventPage from '../HostEventPage';
 import ProfilePage from '../ProfilePage';
 
-export default function App() {
+const App: React.FC = () => {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
@@ -14,4 +15,6 @@ export default function App() {
       <Route path="/profile" element={<ProfilePage />} />
     </Routes>
   );
-}
+};
+
+export default App;

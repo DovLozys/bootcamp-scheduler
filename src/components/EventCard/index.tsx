@@ -1,7 +1,15 @@
+import React from 'react';
+import { Event } from '../../types';
 import './EventCard.css';
 
-export default function EventCard({ event, onViewDetails, onBookNow }) {
-    const formatDate = (dateString) => {
+interface EventCardProps {
+  event: Event;
+  onViewDetails?: (event: Event) => void;
+  onBookNow?: (event: Event) => void;
+}
+
+const EventCard: React.FC<EventCardProps> = ({ event, onViewDetails, onBookNow }) => {
+    const formatDate = (dateString: string): string => {
         const date = new Date(dateString);
         return date.toLocaleDateString('en-US', {
             weekday: 'short',
@@ -11,7 +19,7 @@ export default function EventCard({ event, onViewDetails, onBookNow }) {
         });
     };
 
-    const formatTime = (timeString) => {
+    const formatTime = (timeString: string): string => {
         const [hours, minutes] = timeString.split(':');
         const hour = parseInt(hours, 10);
         const ampm = hour >= 12 ? 'PM' : 'AM';
@@ -60,4 +68,6 @@ export default function EventCard({ event, onViewDetails, onBookNow }) {
             </div>
         </div>
     );
-}
+};
+
+export default EventCard;
