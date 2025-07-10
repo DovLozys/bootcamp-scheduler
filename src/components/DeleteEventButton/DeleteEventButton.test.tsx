@@ -7,10 +7,10 @@ test('renders delete button', () => {
 });
 
 test('calls deleteEvent on click', () => {
-  const mockDelete = jest.fn();
-  jest.doMock('../../services/EventApi.js', () => ({ deleteEvent: mockDelete }));
+  const mockDelete = vi.fn();
+  vi.doMock('../../services/EventApi.ts', () => ({ deleteEvent: mockDelete }));
   render(<DeleteEventButton event_id={2} />);
   fireEvent.click(screen.getByText('Delete event'));
-  // Would call mockDelete if not for jest.doMock limitations in ESM
+  // Would call mockDelete if not for vi.doMock limitations in ESM
   // This is a placeholder for actual integration
 });

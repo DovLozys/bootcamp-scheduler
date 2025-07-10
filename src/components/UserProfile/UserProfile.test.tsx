@@ -2,7 +2,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import UserProfile from './index';
 
 beforeEach(() => {
-  global.fetch = jest.fn(() =>
+  global.fetch = vi.fn(() =>
     Promise.resolve({
       json: () => Promise.resolve([
         {
@@ -14,9 +14,6 @@ beforeEach(() => {
       ])
     })
   );
-});
-afterEach(() => {
-  jest.resetAllMocks();
 });
 
 test('renders user profile events', async () => {

@@ -15,12 +15,12 @@ test('renders edit button and toggles input', () => {
 });
 
 test('calls updateEventDescription on submit', () => {
-  const mockUpdate = jest.fn();
-  jest.doMock('../../services/EventApi.js', () => ({ updateEventDescription: mockUpdate }));
+  const mockUpdate = vi.fn();
+  vi.doMock('../../services/EventApi.ts', () => ({ updateEventDescription: mockUpdate }));
   render(<FormEditDescription event_id={2} event_description="Desc" />);
   fireEvent.click(screen.getByText('Edit'));
   fireEvent.change(screen.getByDisplayValue('Desc'), { target: { value: 'New Desc' } });
   fireEvent.click(screen.getByText('Submit'));
-  // Would call mockUpdate if not for jest.doMock limitations in ESM
+  // Would call mockUpdate if not for vi.doMock limitations in ESM
   // This is a placeholder for actual integration
 });

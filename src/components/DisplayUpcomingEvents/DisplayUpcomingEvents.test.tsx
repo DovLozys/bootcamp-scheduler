@@ -2,24 +2,25 @@ import { render, screen, waitFor } from '@testing-library/react';
 import DisplayUpcomingEvents from './index';
 
 beforeEach(() => {
-  global.fetch = jest.fn(() =>
+  global.fetch = vi.fn(() =>
     Promise.resolve({
-      json: () => Promise.resolve({ payload: { rows: [
-        {
-          id: 1,
-          event_name: 'Upcoming Event',
-          event_date: '2025-07-05',
-          event_start: '12:00',
-          event_duration: '01:30',
-          event_category: 'Talk',
-          event_description: 'An upcoming event.'
+      json: () => Promise.resolve({
+        payload: {
+          rows: [
+            {
+              id: 1,
+              event_name: 'Upcoming Event',
+              event_date: '2025-07-05',
+              event_start: '12:00',
+              event_duration: '01:30',
+              event_category: 'Talk',
+              event_description: 'An upcoming event.'
+            }
+          ]
         }
-      ] } })
+      })
     })
   );
-});
-afterEach(() => {
-  jest.resetAllMocks();
 });
 
 test('renders upcoming event from API', async () => {

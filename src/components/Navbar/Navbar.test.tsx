@@ -10,5 +10,5 @@ test('renders Navbar with links', () => {
   );
   expect(screen.getByAltText('menu-icon')).toBeInTheDocument();
   expect(screen.getByAltText('final-logo')).toBeInTheDocument();
-  expect(screen.getByAltText('default-user')).toBeInTheDocument();
+  expect(screen.getByAltText('user-profile')).toBeInTheDocument();
 });
