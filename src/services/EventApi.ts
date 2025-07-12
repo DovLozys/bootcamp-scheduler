@@ -1,19 +1,33 @@
 import { apiEndpoints } from '../config/env';
+import { api, withRetry } from '../utils/apiClient';
+import { getUserFriendlyMessage } from '../types/errors';
 
+/**
+ * Delete an event by ID
+ */
 async function deleteEvent(id: string): Promise<void> {
-    await fetch(`${apiEndpoints.events}/${id}`, {
-        method: 'DELETE',
-    });
+    try {
+        await withRetry(() => api.delete(`${apiEndpoints.events}/${id}`));
+    } catch (error) {
+        const message = getUserFriendlyMessage(error as Error);
+        throw new Error(`Failed to delete event: ${message}`);
+    }
 }
 
+/**
+ * Update event description
+ */
 async function updateEventDescription(id: string, description: string): Promise<void> {
-    await fetch(`${apiEndpoints.events}/${id}`, {
-        method: 'PATCH',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ event_description: description }),
-    });
+    try {
+        await withRetry(() =>
+            api.patch(`${apiEndpoints.events}/${id}`, {
+                event_description: description
+            })
+        );
+    } catch (error) {
+        const message = getUserFriendlyMessage(error as Error);
+        throw new Error(`Failed to update event: ${message}`);
+    }
 }
 
 export { updateEventDescription, deleteEvent };

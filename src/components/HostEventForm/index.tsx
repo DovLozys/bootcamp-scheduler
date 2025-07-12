@@ -1,6 +1,9 @@
 import React, { useState, FormEvent, ChangeEvent } from 'react';
 import { EventFormData, FormErrors } from '../../types';
 import { apiEndpoints } from '../../config/env';
+import { api, withRetry } from '../../utils/apiClient';
+import { getUserFriendlyMessage } from '../../types/errors';
+import { useToast } from '../../hooks/useToast';
 import './hostEventForm.css';
 
 const HostEventForm: React.FC = () => {
@@ -16,6 +19,9 @@ const HostEventForm: React.FC = () => {
     event_capacity: ''
   });
   const [errors, setErrors] = useState<FormErrors>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const { showError, showSuccess } = useToast();
 
   const totalSteps: number = 3;
 
@@ -103,9 +109,16 @@ const HostEventForm: React.FC = () => {
     setCurrentStep(prev => Math.max(prev - 1, 1));
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
-    if (validateStep(currentStep)) {
+
+    if (!validateStep(currentStep)) {
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
       const newEvent = {
         event_name: formData.event_name,
         event_description: formData.event_description,
@@ -117,32 +130,30 @@ const HostEventForm: React.FC = () => {
         event_capacity: parseInt(formData.event_capacity)
       };
 
-      fetch(apiEndpoints.hostEvent, {
-        method: 'POST',
-        body: JSON.stringify(newEvent),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-        .then(response => response.json())
-        .then(data => {
-          console.log('Event created successfully:', data);
-          // Reset form or redirect
-          setFormData({
-            event_name: '',
-            event_description: '',
-            event_date: '',
-            event_start: '',
-            event_end: '',
-            event_category: '',
-            event_location: '',
-            event_capacity: ''
-          });
-          setCurrentStep(1);
-        })
-        .catch(error => {
-          console.error('Error creating event:', error);
-        });
+      await withRetry(() => api.post(apiEndpoints.hostEvent, newEvent));
+
+      showSuccess('Event created successfully!');
+
+      // Reset form
+      setFormData({
+        event_name: '',
+        event_description: '',
+        event_date: '',
+        event_start: '',
+        event_end: '',
+        event_category: '',
+        event_location: '',
+        event_capacity: ''
+      });
+      setCurrentStep(1);
+      setErrors({});
+
+    } catch (error) {
+      const errorMessage = getUserFriendlyMessage(error as Error);
+      showError(`Failed to create event: ${errorMessage}`);
+      console.error('Error creating event:', error);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -320,8 +331,12 @@ const HostEventForm: React.FC = () => {
               Next
             </button>
           ) : (
-            <button type="submit" className="btn btn-primary">
-              Create Event
+            <button
+              type="submit"
+              className="btn btn-primary"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? 'Creating Event...' : 'Create Event'}
             </button>
           )}
         </div>

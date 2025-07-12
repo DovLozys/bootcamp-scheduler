@@ -45,6 +45,7 @@
   align-items: flex-start;
   transition: box-shadow 0.2s;
 }
+
 .upcoming-card:hover {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.13);
 }
@@ -55,21 +56,81 @@
   margin-bottom: 8px;
   color: #d11403;
 }
+
 .upcoming-time {
   font-size: 1rem;
   color: #555;
   margin-bottom: 4px;
 }
+
 .upcoming-duration {
   color: #888;
   font-size: 0.95em;
 }
+
+/* Loading, Error, and Empty States */
+.upcoming-loading,
+.upcoming-error,
+.upcoming-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  text-align: center;
+  width: 100%;
+}
+
+.upcoming-loading .loading-spinner {
+  width: 30px;
+  height: 30px;
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #007bff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 12px;
+}
+
+.upcoming-loading p,
+.upcoming-error p,
+.upcoming-empty p {
+  color: #666;
+  font-size: 14px;
+  margin: 0;
+}
+
+.upcoming-error p {
+  color: #dc3545;
+  margin-bottom: 12px;
+}
+
+.retry-button-small {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.retry-button-small:hover {
+  background-color: #0056b3;
+}
+
+.retry-button-small:focus {
+  outline: 2px solid #007bff;
+  outline-offset: 2px;
+}
+
 .upcoming-category {
   font-size: 1.05rem;
   font-weight: 500;
   color: #2d7a46;
   margin-bottom: 6px;
 }
+
 .upcoming-description {
   font-size: 1rem;
   color: #333;

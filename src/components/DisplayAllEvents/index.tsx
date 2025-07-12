@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Event, SortOption } from '../../types';
 import { apiEndpoints } from '../../config/env';
+import { api, withRetry } from '../../utils/apiClient';
+import { getUserFriendlyMessage } from '../../types/errors';
+import { useToast } from '../../hooks/useToast';
 
 import Navbar from '../Navbar';
 import EventCard from '../EventCard';
@@ -13,6 +16,10 @@ const DisplayAllEvents: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [selectedCategory, setSelectedCategory] = useState<string>('');
   const [sortBy, setSortBy] = useState<SortOption>('date');
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const { showError, showSuccess } = useToast();
 
   useEffect(() => {
     getAllEvents();
@@ -22,12 +29,21 @@ const DisplayAllEvents: React.FC = () => {
     filterAndSortEvents();
   }, [events, searchQuery, selectedCategory, sortBy]);
 
-  // TODO: move function declaration into useEffect?
   async function getAllEvents(): Promise<void> {
-    const res = await fetch(apiEndpoints.events);
-    const response = await res.json();
+    try {
+      setIsLoading(true);
+      setError(null);
 
-    setEvents(response.payload);
+      const response = await withRetry(() => api.get(apiEndpoints.events));
+      setEvents(response.payload || []);
+    } catch (error) {
+      const errorMessage = getUserFriendlyMessage(error as Error);
+      setError(errorMessage);
+      showError(`Failed to load events: ${errorMessage}`);
+      console.error('Error fetching events:', error);
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   const filterAndSortEvents = (): void => {
@@ -78,6 +94,42 @@ const DisplayAllEvents: React.FC = () => {
   };
 
   const categories: string[] = Array.from(new Set(events.map(event => event.event_category)));
+
+  // Loading state
+  if (isLoading) {
+    return (
+      <div className="all-events-body">
+        <Navbar onSearch={handleSearch} />
+        <div className="events-container">
+          <div className="loading-state">
+            <div className="loading-spinner"></div>
+            <p>Loading events...</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Error state
+  if (error) {
+    return (
+      <div className="all-events-body">
+        <Navbar onSearch={handleSearch} />
+        <div className="events-container">
+          <div className="error-state">
+            <h2>Unable to Load Events</h2>
+            <p>{error}</p>
+            <button
+              onClick={() => getAllEvents()}
+              className="retry-button"
+            >
+              Try Again
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="all-events-body">

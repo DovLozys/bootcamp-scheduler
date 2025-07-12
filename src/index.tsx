@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 
 import App from './components/App';
+import AppWithToast from './components/AppWithToast';
 
 import './index.css';
 
@@ -13,7 +14,7 @@ const root = createRoot(container);
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <AppWithToast />
     </BrowserRouter>
   </React.StrictMode>
 );
