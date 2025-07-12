@@ -2,7 +2,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import DisplayUpcomingEvents from './index';
 
 beforeEach(() => {
-  global.fetch = vi.fn(() =>
+  (global.fetch as any) = vi.fn(() =>
     Promise.resolve({
       json: () => Promise.resolve({
         payload: {
@@ -24,7 +24,7 @@ beforeEach(() => {
 });
 
 test('renders upcoming event from API', async () => {
-  render(<DisplayUpcomingEvents count={1} />);
+  render(<DisplayUpcomingEvents count="1" />);
   await waitFor(() => {
     expect(screen.getByText('Upcoming Event')).toBeInTheDocument();
     expect(screen.getByText('An upcoming event.')).toBeInTheDocument();

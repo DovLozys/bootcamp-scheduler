@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Event } from '../../types';
+import { apiEndpoints } from '../../config/env';
 
 import './displayUpcomingEvents.css';
 
@@ -15,9 +16,7 @@ const DisplayUpcomingEvents: React.FC<DisplayUpcomingEventsProps> = ({ count }) 
   }, [count]);
 
   async function getUpcomingEvents(count: string): Promise<void> {
-    let res = await fetch(
-      'http://localhost:5500/api/v1/events/upcomingevents/' + count
-    );
+    let res = await fetch(apiEndpoints.upcomingEvents(count));
     let response = await res.json();
     setUpcomingEvents(response.payload.rows);
   }

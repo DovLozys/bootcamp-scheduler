@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Event, SortOption } from '../../types';
+import { apiEndpoints } from '../../config/env';
 
 import Navbar from '../Navbar';
 import EventCard from '../EventCard';
@@ -23,7 +24,7 @@ const DisplayAllEvents: React.FC = () => {
 
   // TODO: move function declaration into useEffect?
   async function getAllEvents(): Promise<void> {
-    const res = await fetch('http://localhost:5500/api/v1/events/');
+    const res = await fetch(apiEndpoints.events);
     const response = await res.json();
 
     setEvents(response.payload);

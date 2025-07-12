@@ -2,7 +2,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import UserProfile from './index';
 
 beforeEach(() => {
-  global.fetch = vi.fn(() =>
+  (global.fetch as any) = vi.fn(() =>
     Promise.resolve({
       json: () => Promise.resolve([
         {

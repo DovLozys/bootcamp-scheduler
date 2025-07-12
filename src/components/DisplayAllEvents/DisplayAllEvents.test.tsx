@@ -4,7 +4,7 @@ import DisplayAllEvents from './index';
 
 // Mock fetch for API calls
 beforeEach(() => {
-  global.fetch = vi.fn(() =>
+  (global.fetch as any) = vi.fn(() =>
     Promise.resolve({
       json: () => Promise.resolve({
         payload: [

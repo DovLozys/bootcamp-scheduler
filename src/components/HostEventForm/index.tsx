@@ -1,5 +1,6 @@
 import React, { useState, FormEvent, ChangeEvent } from 'react';
 import { EventFormData, FormErrors } from '../../types';
+import { apiEndpoints } from '../../config/env';
 import './hostEventForm.css';
 
 const HostEventForm: React.FC = () => {
@@ -116,7 +117,7 @@ const HostEventForm: React.FC = () => {
         event_capacity: parseInt(formData.event_capacity)
       };
 
-      fetch('http://localhost:5500/api/v1/events/host-event', {
+      fetch(apiEndpoints.hostEvent, {
         method: 'POST',
         body: JSON.stringify(newEvent),
         headers: {
