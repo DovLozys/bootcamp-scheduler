@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { Event, SortOption } from '../../types';
-import { apiEndpoints } from '../../config/env';
-import { api, withRetry } from '../../utils/apiClient';
-import { getUserFriendlyMessage } from '../../types/errors';
-import { useToast } from '../../hooks/useToast';
+import { Event, SortOption } from '../types';
+import { apiEndpoints } from '../config/env';
+import { api, withRetry } from '../utils/apiClient';
+import { getUserFriendlyMessage } from '../types/errors';
+import { useToast } from '../hooks/useToast';
 
-import Navbar from '../Navbar';
-import EventCard from '../EventCard';
+import Navbar from './Navbar';
+import EventCard from './EventCard';
 
 const DisplayAllEvents: React.FC = () => {
   const [events, setEvents] = useState<Event[]>([]);
@@ -18,14 +18,6 @@ const DisplayAllEvents: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   const { showError } = useToast();
-
-  useEffect(() => {
-    getAllEvents();
-  }, [getAllEvents]);
-
-  useEffect(() => {
-    filterAndSortEvents();
-  }, [filterAndSortEvents]);
 
   const getAllEvents = useCallback(async (): Promise<void> => {
     try {
@@ -83,6 +75,14 @@ const DisplayAllEvents: React.FC = () => {
 
     setFilteredEvents(filtered);
   }, [events, searchQuery, selectedCategory, sortBy]);
+
+  useEffect(() => {
+    getAllEvents();
+  }, [getAllEvents]);
+
+  useEffect(() => {
+    filterAndSortEvents();
+  }, [filterAndSortEvents]);
 
   const handleSearch = (query: string): void => {
     setSearchQuery(query);

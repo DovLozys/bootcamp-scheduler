@@ -1,10 +1,10 @@
 import React, { useState, FormEvent, ChangeEvent } from 'react';
-import { EventFormData, FormErrors } from '../../types';
-import { apiEndpoints } from '../../config/env';
-import { api, withRetry } from '../../utils/apiClient';
-import { getUserFriendlyMessage } from '../../types/errors';
-import { useToast } from '../../hooks/useToast';
-import './HostEventForm.css';
+import { EventFormData, FormErrors } from '../types';
+import { apiEndpoints } from '../config/env';
+import { api, withRetry } from '../utils/apiClient';
+import { getUserFriendlyMessage } from '../types/errors';
+import { useToast } from '../hooks/useToast';
+import styles from './HostEventForm.module.css';
 
 const HostEventForm: React.FC = () => {
   const [currentStep, setCurrentStep] = useState<number>(1);
@@ -186,7 +186,7 @@ const HostEventForm: React.FC = () => {
       case 1:
         return (
           <>
-            <div className='form-group'>
+            <div className={styles.formGroup}>
               <label htmlFor='event-title'>Event Title *</label>
               <input
                 id='event-title'
@@ -196,14 +196,14 @@ const HostEventForm: React.FC = () => {
                 onChange={(e: ChangeEvent<HTMLInputElement>) =>
                   handleInputChange('event_name', e.target.value)
                 }
-                className={errors.event_name ? 'error' : ''}
+                className={errors.event_name ? styles.error : ''}
               />
               {errors.event_name && (
-                <span className='error-message'>{errors.event_name}</span>
+                <span className={styles.errorMessage}>{errors.event_name}</span>
               )}
             </div>
 
-            <div className='form-group'>
+            <div className={styles.formGroup}>
               <label htmlFor='event-desc'>Description *</label>
               <textarea
                 id='event-desc'
@@ -213,16 +213,16 @@ const HostEventForm: React.FC = () => {
                 onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
                   handleInputChange('event_description', e.target.value)
                 }
-                className={errors.event_description ? 'error' : ''}
+                className={errors.event_description ? styles.error : ''}
               />
               {errors.event_description && (
-                <span className='error-message'>
+                <span className={styles.errorMessage}>
                   {errors.event_description}
                 </span>
               )}
             </div>
 
-            <div className='form-group'>
+            <div className={styles.formGroup}>
               <label htmlFor='event-category'>Category *</label>
               <select
                 id='event-category'
@@ -230,7 +230,7 @@ const HostEventForm: React.FC = () => {
                 onChange={(e: ChangeEvent<HTMLSelectElement>) =>
                   handleInputChange('event_category', e.target.value)
                 }
-                className={errors.event_category ? 'error' : ''}
+                className={errors.event_category ? styles.error : ''}
               >
                 <option value=''>Select a category</option>
                 <option value='Class Schedule'>Class Schedule</option>
@@ -239,7 +239,9 @@ const HostEventForm: React.FC = () => {
                 <option value='Project'>Project</option>
               </select>
               {errors.event_category && (
-                <span className='error-message'>{errors.event_category}</span>
+                <span className={styles.errorMessage}>
+                  {errors.event_category}
+                </span>
               )}
             </div>
           </>
@@ -248,7 +250,7 @@ const HostEventForm: React.FC = () => {
       case 2:
         return (
           <>
-            <div className='form-group'>
+            <div className={styles.formGroup}>
               <label htmlFor='event-date'>Date *</label>
               <input
                 id='event-date'
@@ -257,16 +259,16 @@ const HostEventForm: React.FC = () => {
                 onChange={(e: ChangeEvent<HTMLInputElement>) =>
                   handleInputChange('event_date', e.target.value)
                 }
-                className={errors.event_date ? 'error' : ''}
+                className={errors.event_date ? styles.error : ''}
                 min={new Date().toISOString().split('T')[0]}
               />
               {errors.event_date && (
-                <span className='error-message'>{errors.event_date}</span>
+                <span className={styles.errorMessage}>{errors.event_date}</span>
               )}
             </div>
 
-            <div className='form-row'>
-              <div className='form-group'>
+            <div className={styles.formRow}>
+              <div className={styles.formGroup}>
                 <label htmlFor='start-time'>Start Time *</label>
                 <input
                   id='start-time'
@@ -275,13 +277,15 @@ const HostEventForm: React.FC = () => {
                   onChange={(e: ChangeEvent<HTMLInputElement>) =>
                     handleInputChange('event_start', e.target.value)
                   }
-                  className={errors.event_start ? 'error' : ''}
+                  className={errors.event_start ? styles.error : ''}
                 />
                 {errors.event_start && (
-                  <span className='error-message'>{errors.event_start}</span>
+                  <span className={styles.errorMessage}>
+                    {errors.event_start}
+                  </span>
                 )}
               </div>
-              <div className='form-group'>
+              <div className={styles.formGroup}>
                 <label htmlFor='end-time'>End Time *</label>
                 <input
                   id='end-time'
@@ -290,10 +294,12 @@ const HostEventForm: React.FC = () => {
                   onChange={(e: ChangeEvent<HTMLInputElement>) =>
                     handleInputChange('event_end', e.target.value)
                   }
-                  className={errors.event_end ? 'error' : ''}
+                  className={errors.event_end ? styles.error : ''}
                 />
                 {errors.event_end && (
-                  <span className='error-message'>{errors.event_end}</span>
+                  <span className={styles.errorMessage}>
+                    {errors.event_end}
+                  </span>
                 )}
               </div>
             </div>
@@ -303,7 +309,7 @@ const HostEventForm: React.FC = () => {
       case 3:
         return (
           <>
-            <div className='form-group'>
+            <div className={styles.formGroup}>
               <label htmlFor='event-location'>Location *</label>
               <input
                 id='event-location'
@@ -313,14 +319,16 @@ const HostEventForm: React.FC = () => {
                 onChange={(e: ChangeEvent<HTMLInputElement>) =>
                   handleInputChange('event_location', e.target.value)
                 }
-                className={errors.event_location ? 'error' : ''}
+                className={errors.event_location ? styles.error : ''}
               />
               {errors.event_location && (
-                <span className='error-message'>{errors.event_location}</span>
+                <span className={styles.errorMessage}>
+                  {errors.event_location}
+                </span>
               )}
             </div>
 
-            <div className='form-group'>
+            <div className={styles.formGroup}>
               <label htmlFor='event-capacity'>Maximum Capacity *</label>
               <input
                 id='event-capacity'
@@ -331,10 +339,12 @@ const HostEventForm: React.FC = () => {
                 onChange={(e: ChangeEvent<HTMLInputElement>) =>
                   handleInputChange('event_capacity', e.target.value)
                 }
-                className={errors.event_capacity ? 'error' : ''}
+                className={errors.event_capacity ? styles.error : ''}
               />
               {errors.event_capacity && (
-                <span className='error-message'>{errors.event_capacity}</span>
+                <span className={styles.errorMessage}>
+                  {errors.event_capacity}
+                </span>
               )}
             </div>
           </>
@@ -359,15 +369,15 @@ const HostEventForm: React.FC = () => {
   };
 
   return (
-    <section className='form-card'>
-      <div className='progress-bar'>
+    <section className={styles.formCard}>
+      <div className={styles.progressBar}>
         {Array.from({ length: totalSteps }, (_, i) => (
           <div
             key={i}
-            className={`progress-step ${i + 1 <= currentStep ? 'active' : ''}`}
+            className={`${styles.progressStep} ${i + 1 <= currentStep ? styles.active : ''}`}
           >
-            <div className='step-number'>{i + 1}</div>
-            <div className='step-title'>
+            <div className={styles.stepNumber}>{i + 1}</div>
+            <div className={styles.progressStepLabel}>
               {i === 0 && 'Basic Info'}
               {i === 1 && 'Schedule'}
               {i === 2 && 'Details'}
@@ -376,17 +386,17 @@ const HostEventForm: React.FC = () => {
         ))}
       </div>
 
-      <form className='event-form' onSubmit={handleSubmit}>
-        <h2 className='form-title'>Create a New Event</h2>
-        <h3 className='step-title'>{getStepTitle()}</h3>
+      <form className={styles.eventForm} onSubmit={handleSubmit}>
+        <h2 className={styles.formTitle}>Create a New Event</h2>
+        <h3 className={styles.stepTitle}>{getStepTitle()}</h3>
 
         {renderStepContent()}
 
-        <div className='form-navigation'>
+        <div className={styles.formNavigation}>
           {currentStep > 1 && (
             <button
               type='button'
-              className='btn btn-secondary'
+              className={`${styles.btn} ${styles.btnSecondary}`}
               onClick={prevStep}
             >
               Previous
@@ -395,7 +405,7 @@ const HostEventForm: React.FC = () => {
           {currentStep < totalSteps ? (
             <button
               type='button'
-              className='btn btn-primary'
+              className={`${styles.btn} ${styles.btnPrimary}`}
               onClick={nextStep}
             >
               Next
@@ -403,7 +413,7 @@ const HostEventForm: React.FC = () => {
           ) : (
             <button
               type='submit'
-              className='btn btn-primary'
+              className={`${styles.btn} ${styles.btnPrimary}`}
               disabled={isSubmitting}
             >
               {isSubmitting ? 'Creating Event...' : 'Create Event'}

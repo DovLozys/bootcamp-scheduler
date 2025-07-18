@@ -1,15 +1,15 @@
-import HostEventForm from '../HostEventForm';
-import Navbar from '../Navbar';
+import HostEventForm from './HostEventForm';
+import Navbar from './Navbar';
 
-import './HostEventPage.css';
+import styles from './HostEventPage.module.css';
 
 export default function HostEventPage() {
   return (
-    <div className='page-body'>
+    <div className={styles.pageBody}>
       <Navbar />
-      <div className='host-event-header'>
+      <div className={styles.hostEventHeader}>
         <h1>Host an Event</h1>
-        <p className='host-event-subtitle'>
+        <p className={styles.hostEventSubtitle}>
           Fill out the form below to create a new event for your bootcamp
           community.
         </p>

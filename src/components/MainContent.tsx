@@ -1,14 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import DateAndTime from '../DateAndTime';
-import DisplayUpcomingEvents from '../DisplayUpcomingEvents';
-import MyCalendar from '../MyCalendar';
+import DateAndTime from './DateAndTime';
+import DisplayUpcomingEvents from './DisplayUpcomingEvents';
+import MyCalendar from './MyCalendar';
 
-import './MainContent.css';
+import styles from './MainContent.module.css';
 
 const MainContent: React.FC = () => {
   return (
-    <section className='main-display'>
+    <section className={styles.mainDisplay}>
       <h2>Clan Optimist's upcoming...</h2>
       <div id='upcoming-event'>
         <Link to='all-events'>
@@ -17,7 +17,7 @@ const MainContent: React.FC = () => {
       </div>
 
       <DateAndTime />
-      <section className='calendar-placement'>
+      <section className={styles.calendarPlacement}>
         <MyCalendar />
       </section>
       {/* <p>

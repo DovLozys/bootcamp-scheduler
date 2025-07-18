@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { deleteEvent } from '../../services/eventApi';
+import { deleteEvent } from '../services/eventApi';
 
 export default function DeleteEventButton(props) {
   const [id] = useState(props.event_id);

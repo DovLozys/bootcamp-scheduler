@@ -361,6 +361,18 @@ select:focus {
   color: white;
 }
 
+.progress-step-label {
+  font-size: 12px;
+  color: #666;
+  text-align: center;
+  margin-top: 4px;
+}
+
+.progress-step.active .progress-step-label {
+  color: #d11403;
+  font-weight: 600;
+}
+
 .step-title {
   font-size: 18px;
   color: #666;

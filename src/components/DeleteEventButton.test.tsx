@@ -8,7 +8,7 @@ test('renders delete button', () => {
 
 test('calls deleteEvent on click', () => {
   const mockDelete = vi.fn();
-  vi.doMock('../../services/eventApi.ts', () => ({ deleteEvent: mockDelete }));
+  vi.doMock('../services/eventApi.ts', () => ({ deleteEvent: mockDelete }));
   render(<DeleteEventButton event_id={2} />);
   fireEvent.click(screen.getByText('Delete event'));
   // Would call mockDelete if not for vi.doMock limitations in ESM

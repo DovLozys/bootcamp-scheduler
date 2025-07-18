@@ -18,7 +18,7 @@ vi.mock('../../hooks/useToast', () => ({
   }),
 }));
 
-import { api } from '../../utils/apiClient';
+import { api } from '../utils/apiClient';
 
 const mockApiGet = api.get as any;
 

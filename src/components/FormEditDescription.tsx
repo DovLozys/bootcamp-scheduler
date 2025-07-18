@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { updateEventDescription } from '../../services/eventApi';
+import { updateEventDescription } from '../services/eventApi';
 
 export default function FormEditDescription(props) {
   const [description, setDescription] = useState(props.event_description);

@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Event } from '../../types';
-import { apiEndpoints } from '../../config/env';
-import { api, withRetry } from '../../utils/apiClient';
-import { getUserFriendlyMessage } from '../../types/errors';
-import { useToast } from '../../hooks/useToast';
+import { Event } from '../types';
+import { apiEndpoints } from '../config/env';
+import { api, withRetry } from '../utils/apiClient';
+import { getUserFriendlyMessage } from '../types/errors';
+import { useToast } from '../hooks/useToast';
 
 interface DisplayUpcomingEventsProps {
   count: string;
@@ -17,10 +17,6 @@ const DisplayUpcomingEvents: React.FC<DisplayUpcomingEventsProps> = ({
   const [error, setError] = useState<string | null>(null);
 
   const { showError } = useToast();
-
-  useEffect(() => {
-    getUpcomingEvents(count);
-  }, [count, getUpcomingEvents]);
 
   const getUpcomingEvents = useCallback(
     async (count: string): Promise<void> => {
@@ -43,6 +39,10 @@ const DisplayUpcomingEvents: React.FC<DisplayUpcomingEventsProps> = ({
     },
     [showError]
   );
+
+  useEffect(() => {
+    getUpcomingEvents(count);
+  }, [count, getUpcomingEvents]);
 
   // Loading state
   if (isLoading) {
