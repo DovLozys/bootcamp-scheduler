@@ -4,7 +4,7 @@ import DateAndTime from '../DateAndTime';
 import DisplayUpcomingEvents from '../DisplayUpcomingEvents';
 import MyCalendar from '../MyCalendar';
 
-import './mainContent.css';
+import './MainContent.css';
 
 const MainContent: React.FC = () => {
   return (

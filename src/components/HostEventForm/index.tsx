@@ -4,7 +4,7 @@ import { apiEndpoints } from '../../config/env';
 import { api, withRetry } from '../../utils/apiClient';
 import { getUserFriendlyMessage } from '../../types/errors';
 import { useToast } from '../../hooks/useToast';
-import './hostEventForm.css';
+import './HostEventForm.css';
 
 const HostEventForm: React.FC = () => {
   const [currentStep, setCurrentStep] = useState<number>(1);

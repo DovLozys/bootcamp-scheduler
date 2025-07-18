@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Calendar from 'react-calendar';
 
 import 'react-calendar/dist/Calendar.css';
-import './calendar.css';
+import './MyCalendar.css';
 
 const MyCalendar: React.FC = () => {
   const [value, onChange] = useState<Date>(new Date());

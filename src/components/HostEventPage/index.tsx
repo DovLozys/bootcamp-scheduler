@@ -1,7 +1,7 @@
 import HostEventForm from '../HostEventForm';
 import Navbar from '../Navbar';
 
-import './hostEventPage.css';
+import './HostEventPage.css';
 
 export default function HostEventPage() {
   return (

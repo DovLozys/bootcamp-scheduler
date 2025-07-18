@@ -16,7 +16,7 @@ test('renders edit button and toggles input', () => {
 
 test('calls updateEventDescription on submit', () => {
   const mockUpdate = vi.fn();
-  vi.doMock('../../services/EventApi.ts', () => ({
+  vi.doMock('../../services/eventApi.ts', () => ({
     updateEventDescription: mockUpdate,
   }));
   render(<FormEditDescription event_id={2} event_description='Desc' />);

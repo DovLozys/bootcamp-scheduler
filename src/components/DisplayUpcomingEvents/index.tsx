@@ -5,7 +5,7 @@ import { api, withRetry } from '../../utils/apiClient';
 import { getUserFriendlyMessage } from '../../types/errors';
 import { useToast } from '../../hooks/useToast';
 
-import './displayUpcomingEvents.css';
+import './DisplayUpcomingEvents.css';
 
 interface DisplayUpcomingEventsProps {
   count: string;
