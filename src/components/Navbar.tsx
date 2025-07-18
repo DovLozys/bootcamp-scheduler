@@ -5,7 +5,7 @@ import menuicon from './menu-icon.png';
 import defaultuser from './default-user.png';
 import logo from './final-logo.png';
 
-import './Navbar.css';
+import styles from './Navbar.module.css';
 
 interface NavbarProps {
   onSearch?: (query: string) => void;
@@ -31,31 +31,31 @@ const Navbar: React.FC<NavbarProps> = ({ onSearch }) => {
 
   return (
     <div>
-      <nav className='nav-bar'>
-        <div className='nav-left'>
-          <Link to='/host-event' className='nav-link'>
-            <img src={menuicon} alt='menu-icon' className='menu-icon' />
-            <span className='nav-text'>Host Event</span>
+      <nav className={styles.navBar}>
+        <div className={styles.navLeft}>
+          <Link to='/host-event' className={styles.navLink}>
+            <img src={menuicon} alt='menu-icon' className={styles.menuIcon} />
+            <span className={styles.navText}>Host Event</span>
           </Link>
         </div>
 
         <Link to='/'>
-          <div className='logo-container'>
-            <img src={logo} alt='final-logo' className='logo' />
+          <div className={styles.logoContainer}>
+            <img src={logo} alt='final-logo' className={styles.logo} />
           </div>
         </Link>
 
-        <div className='nav-center'>
-          <div className='search-container'>
+        <div className={styles.navCenter}>
+          <div className={styles.searchContainer}>
             <input
               type='text'
               placeholder='Search events...'
               value={searchQuery}
               onChange={handleSearchChange}
-              className='search-input'
+              className={styles.searchInput}
             />
             <svg
-              className='search-icon'
+              className={styles.searchIcon}
               viewBox='0 0 24 24'
               width='20'
               height='20'
@@ -68,39 +68,43 @@ const Navbar: React.FC<NavbarProps> = ({ onSearch }) => {
           </div>
         </div>
 
-        <div className='nav-right'>
-          <Link to='/events' className='nav-link'>
-            <span className='nav-text'>Find Events</span>
+        <div className={styles.navRight}>
+          <Link to='/events' className={styles.navLink}>
+            <span className={styles.navText}>Find Events</span>
           </Link>
 
-          <div className='user-menu'>
+          <div className={styles.userMenu}>
             <img
               src={defaultuser}
               alt='user-profile'
-              className={`default-user ${isAuthenticated ? 'authenticated' : ''}`}
+              className={`${styles.defaultUser} ${isAuthenticated ? styles.authenticated : ''}`}
               onClick={toggleDropdown}
             />
             {isDropdownOpen && (
-              <div className='dropdown-menu'>
+              <div className={styles.dropdownMenu}>
                 {isAuthenticated ? (
                   <>
-                    <Link to='/profile' className='dropdown-item'>
+                    <Link to='/profile' className={styles.dropdownItem}>
                       My Profile
                     </Link>
-                    <Link to='/my-events' className='dropdown-item'>
+                    <Link to='/my-events' className={styles.dropdownItem}>
                       My Events
                     </Link>
-                    <Link to='/settings' className='dropdown-item'>
+                    <Link to='/settings' className={styles.dropdownItem}>
                       Settings
                     </Link>
-                    <button className='dropdown-item logout-btn'>Logout</button>
+                    <button
+                      className={`${styles.dropdownItem} ${styles.logoutBtn}`}
+                    >
+                      Logout
+                    </button>
                   </>
                 ) : (
                   <>
-                    <Link to='/login' className='dropdown-item'>
+                    <Link to='/login' className={styles.dropdownItem}>
                       Login
                     </Link>
-                    <Link to='/signup' className='dropdown-item'>
+                    <Link to='/signup' className={styles.dropdownItem}>
                       Sign Up
                     </Link>
                   </>

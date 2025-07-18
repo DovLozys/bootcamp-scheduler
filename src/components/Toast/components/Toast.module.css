@@ -18,41 +18,41 @@
   border-left: 4px solid;
 }
 
-.toast--visible {
+.toastVisible {
   opacity: 1;
   transform: translateX(0);
 }
 
-.toast--exiting {
+.toastExiting {
   opacity: 0;
   transform: translateX(100%);
 }
 
-.toast--success {
+.toastSuccess {
   border-left-color: #10b981;
   background-color: #f0fdf4;
   color: #166534;
 }
 
-.toast--error {
+.toastError {
   border-left-color: #ef4444;
   background-color: #fef2f2;
   color: #991b1b;
 }
 
-.toast--warning {
+.toastWarning {
   border-left-color: #f59e0b;
   background-color: #fffbeb;
   color: #92400e;
 }
 
-.toast--info {
+.toastInfo {
   border-left-color: #3b82f6;
   background-color: #eff6ff;
   color: #1e40af;
 }
 
-.toast__icon {
+.toastIcon {
   font-size: 16px;
   font-weight: bold;
   flex-shrink: 0;
@@ -64,32 +64,32 @@
   border-radius: 50%;
 }
 
-.toast--success .toast__icon {
+.toastSuccess .toastIcon {
   background-color: #10b981;
   color: white;
 }
 
-.toast--error .toast__icon {
+.toastError .toastIcon {
   background-color: #ef4444;
   color: white;
 }
 
-.toast--warning .toast__icon {
+.toastWarning .toastIcon {
   background-color: #f59e0b;
   color: white;
 }
 
-.toast--info .toast__icon {
+.toastInfo .toastIcon {
   background-color: #3b82f6;
   color: white;
 }
 
-.toast__message {
+.toastMessage {
   flex: 1;
   line-height: 1.4;
 }
 
-.toast__close {
+.toastClose {
   background: none;
   border: none;
   font-size: 16px;
@@ -102,12 +102,12 @@
   color: inherit;
 }
 
-.toast__close:hover {
+.toastClose:hover {
   opacity: 1;
   background-color: rgba(0, 0, 0, 0.1);
 }
 
-.toast__close:focus {
+.toastClose:focus {
   outline: 2px solid currentColor;
   outline-offset: 2px;
 }

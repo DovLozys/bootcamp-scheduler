@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import DateAndTime from './index';
+import DateAndTime from './DateAndTime';
 
 test('renders date and time in professional format', () => {
   render(<DateAndTime />);

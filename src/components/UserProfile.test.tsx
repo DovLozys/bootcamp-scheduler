@@ -1,5 +1,5 @@
 import { render, screen, waitFor } from '@testing-library/react';
-import UserProfile from './index';
+import UserProfile from './UserProfile';
 
 beforeEach(() => {
   (global.fetch as any) = vi.fn(() =>

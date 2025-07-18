@@ -2,8 +2,6 @@ import { useState } from 'react';
 
 import { updateEventDescription } from '../../services/eventApi';
 
-import './FormEditDescription.css';
-
 export default function FormEditDescription(props) {
   const [description, setDescription] = useState(props.event_description);
   const [inputHidden, setInputHidden] = useState(true);

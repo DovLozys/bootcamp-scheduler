@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Event } from '../../types';
 import { apiEndpoints } from '../../config/env';
 import { api, withRetry } from '../../utils/apiClient';
 import { getUserFriendlyMessage } from '../../types/errors';
 import { useToast } from '../../hooks/useToast';
-
-import './DisplayUpcomingEvents.css';
 
 interface DisplayUpcomingEventsProps {
   count: string;
@@ -22,26 +20,29 @@ const DisplayUpcomingEvents: React.FC<DisplayUpcomingEventsProps> = ({
 
   useEffect(() => {
     getUpcomingEvents(count);
-  }, [count]);
+  }, [count, getUpcomingEvents]);
 
-  async function getUpcomingEvents(count: string): Promise<void> {
-    try {
-      setIsLoading(true);
-      setError(null);
+  const getUpcomingEvents = useCallback(
+    async (count: string): Promise<void> => {
+      try {
+        setIsLoading(true);
+        setError(null);
 
-      const response = await withRetry(() =>
-        api.get(apiEndpoints.upcomingEvents(count))
-      );
-      setUpcomingEvents(response.payload?.rows || []);
-    } catch (error) {
-      const errorMessage = getUserFriendlyMessage(error as Error);
-      setError(errorMessage);
-      showError(`Failed to load upcoming events: ${errorMessage}`);
-      console.error('Error fetching upcoming events:', error);
-    } finally {
-      setIsLoading(false);
-    }
-  }
+        const response = await withRetry(() =>
+          api.get(apiEndpoints.upcomingEvents(count))
+        );
+        setUpcomingEvents(response.payload?.rows || []);
+      } catch (error) {
+        const errorMessage = getUserFriendlyMessage(error as Error);
+        setError(errorMessage);
+        showError(`Failed to load upcoming events: ${errorMessage}`);
+        console.error('Error fetching upcoming events:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    [showError]
+  );
 
   // Loading state
   if (isLoading) {

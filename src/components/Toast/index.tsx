@@ -1,6 +1,6 @@
 import React from 'react';
 import Toast, { ToastProps } from './components/Toast';
-import './Toast.css';
+import styles from './Toast.module.css';
 
 export interface ToastData {
   id: string;
@@ -23,7 +23,7 @@ const ToastContainer: React.FC<ToastContainerProps> = ({
   }
 
   return (
-    <div className='toast-container'>
+    <div className={styles.toastContainer}>
       {toasts.map(toast => (
         <Toast
           key={toast.id}

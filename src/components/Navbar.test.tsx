@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import Navbar from './index';
+import Navbar from './Navbar';
 import { MemoryRouter } from 'react-router-dom';
 
 test('renders Navbar with links', () => {

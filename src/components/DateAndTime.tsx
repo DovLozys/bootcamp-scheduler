@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import './DateAndTime.css';
 
 export default function DateAndTime() {
   const getDateTimeString = () => {

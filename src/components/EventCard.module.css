@@ -1,4 +1,4 @@
-.event-card {
+.eventCard {
   background: white;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -11,12 +11,12 @@
   height: 100%;
 }
 
-.event-card:hover {
+.eventCard:hover {
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
   transform: translateY(-2px);
 }
 
-.event-card-header {
+.eventCardHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -24,7 +24,7 @@
   border-bottom: 1px solid #f0f0f0;
 }
 
-.event-category-badge {
+.eventCategoryBadge {
   background: #d11403;
   color: white;
   padding: 4px 12px;
@@ -35,20 +35,20 @@
   letter-spacing: 0.5px;
 }
 
-.event-date {
+.eventDate {
   color: #666;
   font-size: 14px;
   font-weight: 500;
 }
 
-.event-card-body {
+.eventCardBody {
   padding: 20px;
   flex: 1;
   display: flex;
   flex-direction: column;
 }
 
-.event-title {
+.eventTitle {
   font-size: 20px;
   font-weight: 700;
   color: #333;
@@ -56,7 +56,7 @@
   line-height: 1.3;
 }
 
-.event-description {
+.eventDescription {
   color: #666;
   font-size: 14px;
   line-height: 1.5;
@@ -69,11 +69,11 @@
   overflow: hidden;
 }
 
-.event-details {
+.eventDetails {
   margin-top: auto;
 }
 
-.event-time {
+.eventTime {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -87,7 +87,7 @@
   flex-shrink: 0;
 }
 
-.event-card-footer {
+.eventCardFooter {
   padding: 16px 20px;
   border-top: 1px solid #f0f0f0;
   display: flex;
@@ -110,30 +110,30 @@
   justify-content: center;
 }
 
-.btn-primary {
+.btnPrimary {
   background: #d11403;
   color: white;
 }
 
-.btn-primary:hover {
+.btnPrimary:hover {
   background: #b11203;
   transform: translateY(-1px);
 }
 
-.btn-secondary {
+.btnSecondary {
   background: transparent;
   color: #666;
   border: 1px solid #ddd;
 }
 
-.btn-secondary:hover {
+.btnSecondary:hover {
   background: #f8f9fa;
   color: #333;
   border-color: #ccc;
 }
 
 @media (max-width: 768px) {
-  .event-card-footer {
+  .eventCardFooter {
     flex-direction: column;
   }
 

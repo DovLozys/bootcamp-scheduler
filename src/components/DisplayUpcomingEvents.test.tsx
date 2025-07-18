@@ -1,5 +1,5 @@
 import { render, screen, waitFor } from '@testing-library/react';
-import DisplayUpcomingEvents from './index';
+import DisplayUpcomingEvents from './DisplayUpcomingEvents';
 
 // Mock the API client
 vi.mock('../../utils/apiClient', () => ({

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Event, SortOption } from '../../types';
 import { apiEndpoints } from '../../config/env';
 import { api, withRetry } from '../../utils/apiClient';
@@ -7,8 +7,6 @@ import { useToast } from '../../hooks/useToast';
 
 import Navbar from '../Navbar';
 import EventCard from '../EventCard';
-
-import './DisplayAllEvents.css';
 
 const DisplayAllEvents: React.FC = () => {
   const [events, setEvents] = useState<Event[]>([]);
@@ -23,13 +21,13 @@ const DisplayAllEvents: React.FC = () => {
 
   useEffect(() => {
     getAllEvents();
-  }, []);
+  }, [getAllEvents]);
 
   useEffect(() => {
     filterAndSortEvents();
-  }, [events, searchQuery, selectedCategory, sortBy]);
+  }, [filterAndSortEvents]);
 
-  async function getAllEvents(): Promise<void> {
+  const getAllEvents = useCallback(async (): Promise<void> => {
     try {
       setIsLoading(true);
       setError(null);
@@ -44,9 +42,9 @@ const DisplayAllEvents: React.FC = () => {
     } finally {
       setIsLoading(false);
     }
-  }
+  }, [showError]);
 
-  const filterAndSortEvents = (): void => {
+  const filterAndSortEvents = useCallback((): void => {
     let filtered = [...events];
 
     // Filter by search query
@@ -84,7 +82,7 @@ const DisplayAllEvents: React.FC = () => {
     });
 
     setFilteredEvents(filtered);
-  };
+  }, [events, searchQuery, selectedCategory, sortBy]);
 
   const handleSearch = (query: string): void => {
     setSearchQuery(query);

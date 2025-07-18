@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import FormEditDescription from './index';
+import FormEditDescription from './FormEditDescription';
 
 test('renders edit button and toggles input', () => {
   render(<FormEditDescription event_id={1} event_description='Edit me' />);

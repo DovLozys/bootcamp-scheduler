@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import './Toast.css';
+import React, { useEffect, useState, useCallback } from 'react';
+import styles from './Toast.module.css';
 
 export type ToastType = 'success' | 'error' | 'warning' | 'info';
 
@@ -21,6 +21,13 @@ const Toast: React.FC<ToastProps> = ({
   const [isVisible, setIsVisible] = useState(false);
   const [isExiting, setIsExiting] = useState(false);
 
+  const handleClose = useCallback(() => {
+    setIsExiting(true);
+    setTimeout(() => {
+      onClose(id);
+    }, 300); // Match CSS transition duration
+  }, [id, onClose]);
+
   useEffect(() => {
     // Trigger entrance animation
     const timer = setTimeout(() => setIsVisible(true), 10);
@@ -34,14 +41,7 @@ const Toast: React.FC<ToastProps> = ({
       }, duration);
       return () => clearTimeout(timer);
     }
-  }, [duration]);
-
-  const handleClose = () => {
-    setIsExiting(true);
-    setTimeout(() => {
-      onClose(id);
-    }, 300); // Match CSS transition duration
-  };
+  }, [duration, handleClose]);
 
   const getIcon = () => {
     switch (type) {
@@ -60,14 +60,14 @@ const Toast: React.FC<ToastProps> = ({
 
   return (
     <div
-      className={`toast toast--${type} ${isVisible ? 'toast--visible' : ''} ${isExiting ? 'toast--exiting' : ''}`}
+      className={`${styles.toast} ${styles[`toast${type.charAt(0).toUpperCase() + type.slice(1)}`]} ${isVisible ? styles.toastVisible : ''} ${isExiting ? styles.toastExiting : ''}`}
       role='alert'
       aria-live='polite'
     >
-      <div className='toast__icon'>{getIcon()}</div>
-      <div className='toast__message'>{message}</div>
+      <div className={styles.toastIcon}>{getIcon()}</div>
+      <div className={styles.toastMessage}>{message}</div>
       <button
-        className='toast__close'
+        className={styles.toastClose}
         onClick={handleClose}
         aria-label='Close notification'
       >

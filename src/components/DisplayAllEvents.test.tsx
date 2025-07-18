@@ -1,6 +1,6 @@
 import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import DisplayAllEvents from './index';
+import DisplayAllEvents from './DisplayAllEvents';
 
 // Mock the API client
 vi.mock('../../utils/apiClient', () => ({

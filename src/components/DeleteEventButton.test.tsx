@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import DeleteEventButton from './index';
+import DeleteEventButton from './DeleteEventButton';
 
 test('renders delete button', () => {
   render(<DeleteEventButton event_id={1} />);
