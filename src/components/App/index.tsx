@@ -9,10 +9,10 @@ import ProfilePage from '../ProfilePage';
 const App: React.FC = () => {
   return (
     <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/host-event" element={<HostEventPage />} />
-      <Route path="/all-events" element={<DisplayAllEvents />} />
-      <Route path="/profile" element={<ProfilePage />} />
+      <Route path='/' element={<HomePage />} />
+      <Route path='/host-event' element={<HostEventPage />} />
+      <Route path='/all-events' element={<DisplayAllEvents />} />
+      <Route path='/profile' element={<ProfilePage />} />
     </Routes>
   );
 };

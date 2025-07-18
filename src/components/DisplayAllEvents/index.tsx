@@ -19,7 +19,7 @@ const DisplayAllEvents: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const { showError, showSuccess } = useToast();
+  const { showError } = useToast();
 
   useEffect(() => {
     getAllEvents();
@@ -51,22 +51,29 @@ const DisplayAllEvents: React.FC = () => {
 
     // Filter by search query
     if (searchQuery) {
-      filtered = filtered.filter((event: Event) =>
-        event.event_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        event.event_description.toLowerCase().includes(searchQuery.toLowerCase())
+      filtered = filtered.filter(
+        (event: Event) =>
+          event.event_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          event.event_description
+            .toLowerCase()
+            .includes(searchQuery.toLowerCase())
       );
     }
 
     // Filter by category
     if (selectedCategory) {
-      filtered = filtered.filter((event: Event) => event.event_category === selectedCategory);
+      filtered = filtered.filter(
+        (event: Event) => event.event_category === selectedCategory
+      );
     }
 
     // Sort events
     filtered.sort((a: Event, b: Event) => {
       switch (sortBy) {
         case 'date':
-          return new Date(a.event_date).getTime() - new Date(b.event_date).getTime();
+          return (
+            new Date(a.event_date).getTime() - new Date(b.event_date).getTime()
+          );
         case 'name':
           return a.event_name.localeCompare(b.event_name);
         case 'category':
@@ -93,16 +100,18 @@ const DisplayAllEvents: React.FC = () => {
     console.log('Book event:', event.id);
   };
 
-  const categories: string[] = Array.from(new Set(events.map(event => event.event_category)));
+  const categories: string[] = Array.from(
+    new Set(events.map(event => event.event_category))
+  );
 
   // Loading state
   if (isLoading) {
     return (
-      <div className="all-events-body">
+      <div className='all-events-body'>
         <Navbar onSearch={handleSearch} />
-        <div className="events-container">
-          <div className="loading-state">
-            <div className="loading-spinner"></div>
+        <div className='events-container'>
+          <div className='loading-state'>
+            <div className='loading-spinner'></div>
             <p>Loading events...</p>
           </div>
         </div>
@@ -113,16 +122,13 @@ const DisplayAllEvents: React.FC = () => {
   // Error state
   if (error) {
     return (
-      <div className="all-events-body">
+      <div className='all-events-body'>
         <Navbar onSearch={handleSearch} />
-        <div className="events-container">
-          <div className="error-state">
+        <div className='events-container'>
+          <div className='error-state'>
             <h2>Unable to Load Events</h2>
             <p>{error}</p>
-            <button
-              onClick={() => getAllEvents()}
-              className="retry-button"
-            >
+            <button onClick={() => getAllEvents()} className='retry-button'>
               Try Again
             </button>
           </div>
@@ -132,49 +138,52 @@ const DisplayAllEvents: React.FC = () => {
   }
 
   return (
-    <div className="all-events-body">
+    <div className='all-events-body'>
       <Navbar onSearch={handleSearch} />
-      <div className="events-container">
-        <div className="events-header">
-          <h1 className="page-title">All Events</h1>
-          <p className="events-count">
-            {filteredEvents.length} {filteredEvents.length === 1 ? 'event' : 'events'} found
+      <div className='events-container'>
+        <div className='events-header'>
+          <h1 className='page-title'>All Events</h1>
+          <p className='events-count'>
+            {filteredEvents.length}{' '}
+            {filteredEvents.length === 1 ? 'event' : 'events'} found
           </p>
         </div>
 
-        <div className="events-filters">
-          <div className="filter-group">
-            <label htmlFor="category-filter">Category:</label>
+        <div className='events-filters'>
+          <div className='filter-group'>
+            <label htmlFor='category-filter'>Category:</label>
             <select
-              id="category-filter"
+              id='category-filter'
               value={selectedCategory}
-              onChange={(e) => setSelectedCategory(e.target.value)}
-              className="filter-select"
+              onChange={e => setSelectedCategory(e.target.value)}
+              className='filter-select'
             >
-              <option value="">All Categories</option>
+              <option value=''>All Categories</option>
               {categories.map((category: string) => (
-                <option key={category} value={category}>{category}</option>
+                <option key={category} value={category}>
+                  {category}
+                </option>
               ))}
             </select>
           </div>
 
-          <div className="filter-group">
-            <label htmlFor="sort-select">Sort by:</label>
+          <div className='filter-group'>
+            <label htmlFor='sort-select'>Sort by:</label>
             <select
-              id="sort-select"
+              id='sort-select'
               value={sortBy}
-              onChange={(e) => setSortBy(e.target.value as SortOption)}
-              className="filter-select"
+              onChange={e => setSortBy(e.target.value as SortOption)}
+              className='filter-select'
             >
-              <option value="date">Date</option>
-              <option value="name">Name</option>
-              <option value="category">Category</option>
+              <option value='date'>Date</option>
+              <option value='name'>Name</option>
+              <option value='category'>Category</option>
             </select>
           </div>
         </div>
 
-        <div className="events-grid">
-          {filteredEvents.map((event) => (
+        <div className='events-grid'>
+          {filteredEvents.map(event => (
             <EventCard
               key={event.id}
               event={event}
@@ -185,7 +194,7 @@ const DisplayAllEvents: React.FC = () => {
         </div>
 
         {filteredEvents.length === 0 && (
-          <div className="no-events">
+          <div className='no-events'>
             <p>No events found matching your criteria.</p>
           </div>
         )}

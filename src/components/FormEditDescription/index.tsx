@@ -23,13 +23,13 @@ export default function FormEditDescription(props) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <button type="button" className="edit-data-button" onClick={toggleInput}>
+      <button type='button' className='edit-data-button' onClick={toggleInput}>
         Edit
       </button>
       <br />
       <div className={inputHidden ? 'hidden' : ''}>
-        <input id="datainput" onChange={handleChange} value={description} />
-        <button type="submit" id="databutton">
+        <input id='datainput' onChange={handleChange} value={description} />
+        <button type='submit' id='databutton'>
           Submit
         </button>
       </div>

@@ -11,12 +11,12 @@ export interface ToastProps {
   onClose: (id: string) => void;
 }
 
-const Toast: React.FC<ToastProps> = ({ 
-  id, 
-  message, 
-  type, 
-  duration = 5000, 
-  onClose 
+const Toast: React.FC<ToastProps> = ({
+  id,
+  message,
+  type,
+  duration = 5000,
+  onClose,
 }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [isExiting, setIsExiting] = useState(false);
@@ -59,21 +59,17 @@ const Toast: React.FC<ToastProps> = ({
   };
 
   return (
-    <div 
+    <div
       className={`toast toast--${type} ${isVisible ? 'toast--visible' : ''} ${isExiting ? 'toast--exiting' : ''}`}
-      role="alert"
-      aria-live="polite"
+      role='alert'
+      aria-live='polite'
     >
-      <div className="toast__icon">
-        {getIcon()}
-      </div>
-      <div className="toast__message">
-        {message}
-      </div>
-      <button 
-        className="toast__close"
+      <div className='toast__icon'>{getIcon()}</div>
+      <div className='toast__message'>{message}</div>
+      <button
+        className='toast__close'
         onClick={handleClose}
-        aria-label="Close notification"
+        aria-label='Close notification'
       >
         ✕
       </button>

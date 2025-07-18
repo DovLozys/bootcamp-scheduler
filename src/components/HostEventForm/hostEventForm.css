@@ -10,9 +10,20 @@
   color: #000000;
   cursor: pointer;
   display: inline-flex;
-  font-family: BlinkMacSystemFont, -apple-system, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Helvetica,
-    Arial, sans-serif;
+  font-family:
+    BlinkMacSystemFont,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    'Fira Sans',
+    'Droid Sans',
+    'Helvetica Neue',
+    Helvetica,
+    Arial,
+    sans-serif;
   font-size: 1rem;
   height: 3em;
   width: 98%;
@@ -41,7 +52,9 @@
   margin: 40px auto;
   background: #fff;
   border-radius: 16px;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08), 0 1.5px 6px rgba(226, 124, 115, 0.12);
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.08),
+    0 1.5px 6px rgba(226, 124, 115, 0.12);
   padding: 32px 28px 28px 28px;
   display: flex;
   flex-direction: column;
@@ -74,9 +87,9 @@
   font-family: inherit;
 }
 
-.form-group input[type="time"],
-.form-group input[type="date"],
-.form-group input[type="number"] {
+.form-group input[type='time'],
+.form-group input[type='date'],
+.form-group input[type='number'] {
   appearance: none;
   -webkit-appearance: none;
 }
@@ -92,21 +105,23 @@ label {
   color: #333;
 }
 
-input[type="text"],
-input[type="date"],
+input[type='text'],
+input[type='date'],
 select {
   padding: 10px 12px;
   border: 1px solid #e27c73;
   border-radius: 6px;
   font-size: 1rem;
   background: #fafafa;
-  transition: border 0.2s, box-shadow 0.2s;
+  transition:
+    border 0.2s,
+    box-shadow 0.2s;
   appearance: none;
   -webkit-appearance: none;
 }
 
-input[type="text"]:focus,
-input[type="date"]:focus,
+input[type='text']:focus,
+input[type='date']:focus,
 select:focus {
   border: 1.5px solid #d11403;
   outline: none;
@@ -123,7 +138,9 @@ select:focus {
   font-weight: 600;
   cursor: pointer;
   margin-top: 10px;
-  transition: background 0.2s, box-shadow 0.2s;
+  transition:
+    background 0.2s,
+    box-shadow 0.2s;
   box-shadow: 0 2px 8px rgba(209, 20, 3, 0.08);
 }
 
@@ -261,7 +278,7 @@ select:focus {
   color: #223254;
 }
 
-.select select option[value=""][disabled] {
+.select select option[value=''][disabled] {
   display: none;
 }
 
@@ -270,7 +287,7 @@ select:focus {
   border-color: #2c2a2a;
 }
 
-.select select:hover+svg {
+.select select:hover + svg {
   stroke: #3a3737;
 }
 

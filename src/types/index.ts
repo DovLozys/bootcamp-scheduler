@@ -49,7 +49,11 @@ export interface APIResponse<T> {
   error?: string;
 }
 
-export type EventCategory = 'Class Schedule' | 'Guest Speaker' | 'Feedback' | 'Project';
+export type EventCategory =
+  | 'Class Schedule'
+  | 'Guest Speaker'
+  | 'Feedback'
+  | 'Project';
 
 export type SortOption = 'date' | 'name' | 'category';
 

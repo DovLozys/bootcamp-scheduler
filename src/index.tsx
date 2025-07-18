@@ -3,7 +3,6 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 
-import App from './components/App';
 import AppWithToast from './components/AppWithToast';
 
 import './index.css';

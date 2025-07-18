@@ -12,7 +12,7 @@ export default function DeleteEventButton(props) {
   }
 
   return (
-    <button onClick={handleClick} className="delete-data-button">
+    <button onClick={handleClick} className='delete-data-button'>
       Delete event
     </button>
   );

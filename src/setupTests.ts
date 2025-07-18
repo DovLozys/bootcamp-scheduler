@@ -9,5 +9,5 @@ global.fetch = vi.fn() as any;
 
 // Reset all mocks before each test
 beforeEach(() => {
-    vi.resetAllMocks();
+  vi.resetAllMocks();
 });
