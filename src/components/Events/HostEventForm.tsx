@@ -1,9 +1,9 @@
 import React, { useState, FormEvent, ChangeEvent } from 'react';
-import { EventFormData, FormErrors } from '../types';
-import { apiEndpoints } from '../config/env';
-import { api, withRetry } from '../utils/apiClient';
-import { getUserFriendlyMessage } from '../types/errors';
-import { useToast } from '../hooks/useToast';
+import { EventFormData, FormErrors } from '../../types';
+import { apiEndpoints } from '../../config/env';
+import { api, withRetry } from '../../utils/apiClient';
+import { getUserFriendlyMessage } from '../../types/errors';
+import { useToast } from '../../hooks/useToast';
 import styles from './HostEventForm.module.css';
 
 const HostEventForm: React.FC = () => {

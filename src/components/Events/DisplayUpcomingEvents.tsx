@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Event } from '../types';
-import { apiEndpoints } from '../config/env';
-import { api, withRetry } from '../utils/apiClient';
-import { getUserFriendlyMessage } from '../types/errors';
-import { useToast } from '../hooks/useToast';
+import { Event } from '../../types';
+import { apiEndpoints } from '../../config/env';
+import { api, withRetry } from '../../utils/apiClient';
+import { getUserFriendlyMessage } from '../../types/errors';
+import { useToast } from '../../hooks/useToast';
 
 interface DisplayUpcomingEventsProps {
   count: string;

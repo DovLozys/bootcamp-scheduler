@@ -2,7 +2,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import FormEditDescription from './FormEditDescription';
 
 test('renders edit button and toggles input', () => {
-  render(<FormEditDescription event_id={1} event_description='Edit me' />);
+  render(<FormEditDescription event_id='1' event_description='Edit me' />);
   // Edit button is present
   expect(screen.getByText('Edit')).toBeInTheDocument();
   // Input is hidden initially
@@ -19,7 +19,7 @@ test('calls updateEventDescription on submit', () => {
   vi.doMock('../../services/eventApi.ts', () => ({
     updateEventDescription: mockUpdate,
   }));
-  render(<FormEditDescription event_id={2} event_description='Desc' />);
+  render(<FormEditDescription event_id='2' event_description='Desc' />);
   fireEvent.click(screen.getByText('Edit'));
   fireEvent.change(screen.getByDisplayValue('Desc'), {
     target: { value: 'New Desc' },

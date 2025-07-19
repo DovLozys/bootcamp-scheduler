@@ -1,9 +1,9 @@
 import React, { useState, ChangeEvent } from 'react';
 import { Link } from 'react-router-dom';
 
-import menuicon from './menu-icon.png';
-import defaultuser from './default-user.png';
-import logo from './final-logo.png';
+import menuicon from '../../assets/images/menu-icon.png';
+import defaultuser from '../../assets/images/default-user.png';
+import logo from '../../assets/images/final-logo.png';
 
 import styles from './Navbar.module.css';
 

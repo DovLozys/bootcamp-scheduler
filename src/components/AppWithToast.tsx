@@ -1,6 +1,6 @@
 import React from 'react';
 import App from './App';
-import ToastContainer from './Toast';
+import ToastContainer from './UI/ToastContainer';
 import { useToast } from '../hooks/useToast';
 
 /**

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, ChangeEvent } from 'react';
-import { Event, UserInfo, TabType } from '../types';
-import EventCard from './EventCard';
+import { Event, UserInfo, TabType } from '../../types';
+import EventCard from '../Events/EventCard';
 
 interface UserProfileProps {
   name?: string;

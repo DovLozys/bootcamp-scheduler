@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import DateAndTime from './DateAndTime';
-import DisplayUpcomingEvents from './DisplayUpcomingEvents';
-import MyCalendar from './MyCalendar';
+import DateAndTime from '../UI/DateAndTime';
+import DisplayUpcomingEvents from '../Events/DisplayUpcomingEvents';
+import MyCalendar from '../UI/MyCalendar';
 
 import styles from './MainContent.module.css';
 

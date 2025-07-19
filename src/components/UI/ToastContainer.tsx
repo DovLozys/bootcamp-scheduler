@@ -1,6 +1,6 @@
 import React from 'react';
-import Toast, { ToastProps } from './components/Toast';
-import styles from './Toast.module.css';
+import Toast, { ToastProps } from './Toast';
+import styles from './ToastContainer.module.css';
 
 export interface ToastData {
   id: string;

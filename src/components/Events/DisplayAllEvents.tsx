@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { Event, SortOption } from '../types';
-import { apiEndpoints } from '../config/env';
-import { api, withRetry } from '../utils/apiClient';
-import { getUserFriendlyMessage } from '../types/errors';
-import { useToast } from '../hooks/useToast';
+import { Event, SortOption } from '../../types';
+import { apiEndpoints } from '../../config/env';
+import { api, withRetry } from '../../utils/apiClient';
+import { getUserFriendlyMessage } from '../../types/errors';
+import { useToast } from '../../hooks/useToast';
 
-import Navbar from './Navbar';
+import Navbar from '../Layout/Navbar';
 import EventCard from './EventCard';
 
 const DisplayAllEvents: React.FC = () => {
