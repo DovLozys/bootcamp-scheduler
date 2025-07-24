@@ -25,7 +25,9 @@ const DisplayUpcomingEvents: React.FC<DisplayUpcomingEventsProps> = ({
         setError(null);
 
         const response = await withRetry(() =>
-          api.get(apiEndpoints.upcomingEvents(count))
+          api.get<{ payload: { rows: Event[] } }>(
+            apiEndpoints.upcomingEvents(count)
+          )
         );
         setUpcomingEvents(response.payload?.rows || []);
       } catch (error) {

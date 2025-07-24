@@ -6,15 +6,20 @@ export interface AppError {
   message: string;
   code?: string;
   status?: number;
-  details?: any;
+  details?: Record<string, unknown>;
 }
 
 export class APIError extends Error implements AppError {
   code?: string;
   status?: number;
-  details?: any;
+  details?: Record<string, unknown>;
 
-  constructor(message: string, status?: number, code?: string, details?: any) {
+  constructor(
+    message: string,
+    status?: number,
+    code?: string,
+    details?: Record<string, unknown>
+  ) {
     super(message);
     this.name = 'APIError';
     this.status = status;
@@ -26,7 +31,7 @@ export class APIError extends Error implements AppError {
 export class NetworkError extends Error implements AppError {
   code?: string;
   status?: number;
-  details?: any;
+  details?: Record<string, unknown>;
 
   constructor(message: string = 'Network connection failed') {
     super(message);
@@ -38,9 +43,9 @@ export class NetworkError extends Error implements AppError {
 export class ValidationError extends Error implements AppError {
   code?: string;
   status?: number;
-  details?: any;
+  details?: Record<string, unknown>;
 
-  constructor(message: string, details?: any) {
+  constructor(message: string, details?: Record<string, unknown>) {
     super(message);
     this.name = 'ValidationError';
     this.code = 'VALIDATION_ERROR';
@@ -120,6 +125,6 @@ export async function parseAPIError(response: Response): Promise<APIError> {
     errorMessage,
     response.status,
     response.status.toString(),
-    errorDetails
+    errorDetails || undefined
   );
 }

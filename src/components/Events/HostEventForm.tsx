@@ -1,6 +1,6 @@
 import React, { useState, FormEvent, ChangeEvent } from 'react';
 import { EventFormData, FormErrors } from '../../types';
-import { apiEndpoints } from '../../config/env';
+import { apiEndpoints, env } from '../../config/env';
 import { api, withRetry } from '../../utils/apiClient';
 import { getUserFriendlyMessage } from '../../types/errors';
 import { useToast } from '../../hooks/useToast';
@@ -25,38 +25,25 @@ const HostEventForm: React.FC = () => {
 
   const totalSteps: number = 3;
 
-  function diff(eventStartTime: string, eventEndTime: string): string {
-    const startParts = eventStartTime.split(':');
-    const endParts = eventEndTime.split(':');
-    var eventStartTimeDate = new Date(
-      0,
-      0,
-      0,
-      parseInt(startParts[0]),
-      parseInt(startParts[1]),
-      0
-    );
-    var endDate = new Date(
-      0,
-      0,
-      0,
-      parseInt(endParts[0]),
-      parseInt(endParts[1]),
-      0
-    );
-    var diff = endDate.getTime() - eventStartTimeDate.getTime();
-    var hours = Math.floor(diff / 1000 / 60 / 60);
-    diff -= hours * 1000 * 60 * 60;
-    var minutes = Math.floor(diff / 1000 / 60);
-    if (hours < 0) hours = hours + 24;
-    return (
-      (hours <= 9 ? '0' : '') +
-      hours +
-      ':' +
-      (minutes <= 9 ? '0' : '') +
-      minutes
-    );
-  }
+  const calculateDuration = (startTime: string, endTime: string): string => {
+    const [startHours, startMinutes] = startTime.split(':').map(Number);
+    const [endHours, endMinutes] = endTime.split(':').map(Number);
+
+    const startDate = new Date(0, 0, 0, startHours, startMinutes, 0);
+    const endDate = new Date(0, 0, 0, endHours, endMinutes, 0);
+
+    let diffMs = endDate.getTime() - startDate.getTime();
+
+    // Handle overnight events
+    if (diffMs < 0) {
+      diffMs += 24 * 60 * 60 * 1000;
+    }
+
+    const hours = Math.floor(diffMs / (1000 * 60 * 60));
+    const minutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+
+    return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+  };
 
   const validateStep = (step: number): boolean => {
     const newErrors: FormErrors = {};
@@ -149,7 +136,10 @@ const HostEventForm: React.FC = () => {
         event_description: formData.event_description,
         event_date: formData.event_date,
         event_start: formData.event_start,
-        event_duration: diff(formData.event_start, formData.event_end),
+        event_duration: calculateDuration(
+          formData.event_start,
+          formData.event_end
+        ),
         event_category: formData.event_category,
         event_location: formData.event_location,
         event_capacity: parseInt(formData.event_capacity),
@@ -175,7 +165,15 @@ const HostEventForm: React.FC = () => {
     } catch (error) {
       const errorMessage = getUserFriendlyMessage(error as Error);
       showError(`Failed to create event: ${errorMessage}`);
-      console.error('Error creating event:', error);
+
+      // Enhanced error logging for debugging
+      if (env.IS_DEVELOPMENT) {
+        console.error('Error creating event:', {
+          error,
+          formData,
+          timestamp: new Date().toISOString(),
+        });
+      }
     } finally {
       setIsSubmitting(false);
     }

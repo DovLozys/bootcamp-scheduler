@@ -49,6 +49,12 @@ export interface APIResponse<T> {
   error?: string;
 }
 
+export interface EventsResponse {
+  payload: Event[];
+  success: boolean;
+  error?: string;
+}
+
 export type EventCategory =
   | 'Class Schedule'
   | 'Guest Speaker'

@@ -7,6 +7,7 @@ import { useToast } from '../../hooks/useToast';
 
 import Navbar from '../Layout/Navbar';
 import EventCard from './EventCard';
+import styles from './DisplayAllEvents.module.css';
 
 const DisplayAllEvents: React.FC = () => {
   const [events, setEvents] = useState<Event[]>([]);
@@ -24,7 +25,9 @@ const DisplayAllEvents: React.FC = () => {
       setIsLoading(true);
       setError(null);
 
-      const response = await withRetry(() => api.get(apiEndpoints.events));
+      const response = await withRetry(() =>
+        api.get<{ payload: Event[] }>(apiEndpoints.events)
+      );
       setEvents(response.payload || []);
     } catch (error) {
       const errorMessage = getUserFriendlyMessage(error as Error);
@@ -105,11 +108,11 @@ const DisplayAllEvents: React.FC = () => {
   // Loading state
   if (isLoading) {
     return (
-      <div className='all-events-body'>
+      <div className={styles.allEventsBody}>
         <Navbar onSearch={handleSearch} />
-        <div className='events-container'>
-          <div className='loading-state'>
-            <div className='loading-spinner'></div>
+        <div className={styles.eventsContainer}>
+          <div className={styles.loadingState}>
+            <div className={styles.loadingSpinner}></div>
             <p>Loading events...</p>
           </div>
         </div>
@@ -120,13 +123,16 @@ const DisplayAllEvents: React.FC = () => {
   // Error state
   if (error) {
     return (
-      <div className='all-events-body'>
+      <div className={styles.allEventsBody}>
         <Navbar onSearch={handleSearch} />
-        <div className='events-container'>
-          <div className='error-state'>
+        <div className={styles.eventsContainer}>
+          <div className={styles.errorState}>
             <h2>Unable to Load Events</h2>
             <p>{error}</p>
-            <button onClick={() => getAllEvents()} className='retry-button'>
+            <button
+              onClick={() => getAllEvents()}
+              className={styles.retryButton}
+            >
               Try Again
             </button>
           </div>
@@ -136,25 +142,25 @@ const DisplayAllEvents: React.FC = () => {
   }
 
   return (
-    <div className='all-events-body'>
+    <div className={styles.allEventsBody}>
       <Navbar onSearch={handleSearch} />
-      <div className='events-container'>
-        <div className='events-header'>
-          <h1 className='page-title'>All Events</h1>
-          <p className='events-count'>
+      <div className={styles.eventsContainer}>
+        <div className={styles.eventsHeader}>
+          <h1 className={styles.pageTitle}>All Events</h1>
+          <p className={styles.eventsCount}>
             {filteredEvents.length}{' '}
             {filteredEvents.length === 1 ? 'event' : 'events'} found
           </p>
         </div>
 
-        <div className='events-filters'>
-          <div className='filter-group'>
+        <div className={styles.eventsFilters}>
+          <div className={styles.filterGroup}>
             <label htmlFor='category-filter'>Category:</label>
             <select
               id='category-filter'
               value={selectedCategory}
               onChange={e => setSelectedCategory(e.target.value)}
-              className='filter-select'
+              className={styles.filterSelect}
             >
               <option value=''>All Categories</option>
               {categories.map((category: string) => (
@@ -165,13 +171,13 @@ const DisplayAllEvents: React.FC = () => {
             </select>
           </div>
 
-          <div className='filter-group'>
+          <div className={styles.filterGroup}>
             <label htmlFor='sort-select'>Sort by:</label>
             <select
               id='sort-select'
               value={sortBy}
               onChange={e => setSortBy(e.target.value as SortOption)}
-              className='filter-select'
+              className={styles.filterSelect}
             >
               <option value='date'>Date</option>
               <option value='name'>Name</option>
@@ -180,7 +186,7 @@ const DisplayAllEvents: React.FC = () => {
           </div>
         </div>
 
-        <div className='events-grid'>
+        <div className={styles.eventsGrid}>
           {filteredEvents.map(event => (
             <EventCard
               key={event.id}
@@ -192,7 +198,7 @@ const DisplayAllEvents: React.FC = () => {
         </div>
 
         {filteredEvents.length === 0 && (
-          <div className='no-events'>
+          <div className={styles.noEvents}>
             <p>No events found matching your criteria.</p>
           </div>
         )}

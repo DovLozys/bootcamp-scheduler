@@ -8,7 +8,7 @@ export interface RequestConfig extends RequestInit {
 /**
  * Enhanced fetch wrapper with error handling, timeout, and retry logic
  */
-export async function apiRequest<T = any>(
+export async function apiRequest<T = unknown>(
   url: string,
   config: RequestConfig = {}
 ): Promise<T> {
@@ -70,12 +70,12 @@ export async function apiRequest<T = any>(
  * Convenience methods for different HTTP verbs
  */
 export const api = {
-  get: <T = any>(url: string, config?: RequestConfig): Promise<T> =>
+  get: <T = unknown>(url: string, config?: RequestConfig): Promise<T> =>
     apiRequest<T>(url, { ...config, method: 'GET' }),
 
-  post: <T = any>(
+  post: <T = unknown>(
     url: string,
-    data?: any,
+    data?: unknown,
     config?: RequestConfig
   ): Promise<T> =>
     apiRequest<T>(url, {
@@ -84,16 +84,20 @@ export const api = {
       body: data ? JSON.stringify(data) : undefined,
     }),
 
-  put: <T = any>(url: string, data?: any, config?: RequestConfig): Promise<T> =>
+  put: <T = unknown>(
+    url: string,
+    data?: unknown,
+    config?: RequestConfig
+  ): Promise<T> =>
     apiRequest<T>(url, {
       ...config,
       method: 'PUT',
       body: data ? JSON.stringify(data) : undefined,
     }),
 
-  patch: <T = any>(
+  patch: <T = unknown>(
     url: string,
-    data?: any,
+    data?: unknown,
     config?: RequestConfig
   ): Promise<T> =>
     apiRequest<T>(url, {
@@ -102,7 +106,7 @@ export const api = {
       body: data ? JSON.stringify(data) : undefined,
     }),
 
-  delete: <T = any>(url: string, config?: RequestConfig): Promise<T> =>
+  delete: <T = unknown>(url: string, config?: RequestConfig): Promise<T> =>
     apiRequest<T>(url, { ...config, method: 'DELETE' }),
 };
 
