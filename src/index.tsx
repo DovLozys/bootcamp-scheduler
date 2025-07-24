@@ -4,8 +4,14 @@ import { BrowserRouter } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 
 import AppWithToast from './components/AppWithToast';
+import { errorReporter } from './utils/errorReporting';
+import { performanceMonitor } from './utils/performance';
 
 import './index.css';
+
+// Initialize monitoring
+errorReporter;
+performanceMonitor;
 
 const container = document.getElementById('root') as HTMLElement;
 const root = createRoot(container);
