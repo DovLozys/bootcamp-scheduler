@@ -1,5 +1,6 @@
 import React, { useState, ChangeEvent } from 'react';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../../contexts/AuthContext';
 
 import menuicon from '../../assets/images/menu-icon.png';
 import defaultuser from '../../assets/images/default-user.png';
@@ -14,8 +15,7 @@ interface NavbarProps {
 const Navbar: React.FC<NavbarProps> = ({ onSearch }) => {
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
-  // This would come from auth context
-  const [isAuthenticated] = useState<boolean>(false);
+  const { isAuthenticated, user, logout } = useAuth();
 
   const handleSearchChange = (e: ChangeEvent<HTMLInputElement>): void => {
     const query = e.target.value;
@@ -27,6 +27,15 @@ const Navbar: React.FC<NavbarProps> = ({ onSearch }) => {
 
   const toggleDropdown = (): void => {
     setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  const handleLogout = async (): void => {
+    try {
+      await logout();
+      setIsDropdownOpen(false);
+    } catch (error) {
+      console.error('Logout failed:', error);
+    }
   };
 
   return (
@@ -74,37 +83,58 @@ const Navbar: React.FC<NavbarProps> = ({ onSearch }) => {
           </Link>
 
           <div className={styles.userMenu}>
-            <img
-              src={defaultuser}
-              alt='user-profile'
-              className={`${styles.defaultUser} ${isAuthenticated ? styles.authenticated : ''}`}
-              onClick={toggleDropdown}
-            />
+            <div className={styles.userInfo}>
+              {isAuthenticated && user && (
+                <span className={styles.userName}>
+                  Hi, {user.name.split(' ')[0]}
+                </span>
+              )}
+              <img
+                src={defaultuser}
+                alt='user-profile'
+                className={`${styles.defaultUser} ${isAuthenticated ? styles.authenticated : ''}`}
+                onClick={toggleDropdown}
+              />
+            </div>
             {isDropdownOpen && (
               <div className={styles.dropdownMenu}>
                 {isAuthenticated ? (
                   <>
-                    <Link to='/profile' className={styles.dropdownItem}>
+                    <Link
+                      to='/profile'
+                      className={styles.dropdownItem}
+                      onClick={() => setIsDropdownOpen(false)}
+                    >
                       My Profile
                     </Link>
-                    <Link to='/my-events' className={styles.dropdownItem}>
+                    <Link
+                      to='/my-events'
+                      className={styles.dropdownItem}
+                      onClick={() => setIsDropdownOpen(false)}
+                    >
                       My Events
-                    </Link>
-                    <Link to='/settings' className={styles.dropdownItem}>
-                      Settings
                     </Link>
                     <button
                       className={`${styles.dropdownItem} ${styles.logoutBtn}`}
+                      onClick={handleLogout}
                     >
                       Logout
                     </button>
                   </>
                 ) : (
                   <>
-                    <Link to='/login' className={styles.dropdownItem}>
+                    <Link
+                      to='/login'
+                      className={styles.dropdownItem}
+                      onClick={() => setIsDropdownOpen(false)}
+                    >
                       Login
                     </Link>
-                    <Link to='/signup' className={styles.dropdownItem}>
+                    <Link
+                      to='/register'
+                      className={styles.dropdownItem}
+                      onClick={() => setIsDropdownOpen(false)}
+                    >
                       Sign Up
                     </Link>
                   </>
