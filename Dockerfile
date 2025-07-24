@@ -1,20 +1,36 @@
-# syntax=docker/dockerfile:1
-FROM node:16-alpine
+# Multi-stage build for production
+FROM node:20-alpine AS builder
 
 # Set working directory
 WORKDIR /app
 
-# Install dependencies
-COPY package.json package-lock.json ./
-ENV NODE_ENV=production
-RUN npm ci --only=production
+# Copy package files
+COPY package*.json ./
 
-# Copy app source
+# Install dependencies
+RUN npm ci --only=production && npm cache clean --force
+
+# Copy source code
 COPY . .
 
-# Use a non-root user for security
-RUN addgroup -S appgroup && adduser -S appuser -G appgroup
-USER appuser
+# Build the application
+RUN npm run build
 
-EXPOSE 3000
-CMD ["npm", "start"]
+# Production stage
+FROM nginx:alpine AS production
+
+# Copy custom nginx config
+COPY nginx.conf /etc/nginx/nginx.conf
+
+# Copy built application
+COPY --from=builder /app/build /usr/share/nginx/html
+
+# Add health check
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+  CMD curl -f http://localhost/ || exit 1
+
+# Expose port
+EXPOSE 80
+
+# Start nginx
+CMD ["nginx", "-g", "daemon off;"]
