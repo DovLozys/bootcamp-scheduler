@@ -1,6 +1,7 @@
 import React, { ReactElement } from 'react';
 import { render, RenderOptions } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
+import { AuthContext } from '../contexts/AuthContext';
 
 // Mock user for testing
 export const mockUser = {
@@ -31,11 +32,36 @@ interface CustomRenderOptions extends Omit<RenderOptions, 'wrapper'> {
   user?: typeof mockUser | null;
 }
 
+// Mock AuthProvider for testing
+const MockAuthProvider: React.FC<{
+  children: React.ReactNode;
+  user?: typeof mockUser | null;
+}> = ({ children, user = null }) => {
+  const mockAuthValue = {
+    user,
+    isLoading: false,
+    isAuthenticated: !!user,
+    login: () => Promise.resolve(),
+    logout: () => Promise.resolve(),
+    register: () => Promise.resolve(),
+  };
+
+  return (
+    <AuthContext.Provider value={mockAuthValue}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
+
 const AllTheProviders: React.FC<{
   children: React.ReactNode;
   user?: typeof mockUser | null;
-}> = ({ children }) => {
-  return <BrowserRouter>{children}</BrowserRouter>;
+}> = ({ children, user }) => {
+  return (
+    <BrowserRouter>
+      <MockAuthProvider user={user}>{children}</MockAuthProvider>
+    </BrowserRouter>
+  );
 };
 
 const customRender = (ui: ReactElement, options: CustomRenderOptions = {}) => {

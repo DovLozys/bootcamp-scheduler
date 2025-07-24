@@ -1,5 +1,4 @@
-import { render, screen, waitFor, fireEvent } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
+import { render, screen, waitFor } from '../../utils/testUtils';
 import DisplayAllEvents from './DisplayAllEvents';
 
 // Mock the API client
@@ -51,11 +50,7 @@ beforeEach(() => {
 });
 
 test('renders event cards from API', async () => {
-  render(
-    <MemoryRouter>
-      <DisplayAllEvents />
-    </MemoryRouter>
-  );
+  render(<DisplayAllEvents />);
 
   // Initially shows loading state
   expect(screen.getByText('Loading events...')).toBeInTheDocument();
@@ -71,11 +66,7 @@ test('renders event cards from API', async () => {
 });
 
 test('renders multiple events', async () => {
-  render(
-    <MemoryRouter>
-      <DisplayAllEvents />
-    </MemoryRouter>
-  );
+  render(<DisplayAllEvents />);
 
   // Wait for events to load
   await waitFor(() => {
@@ -85,11 +76,7 @@ test('renders multiple events', async () => {
 });
 
 test('renders event category and time', async () => {
-  render(
-    <MemoryRouter>
-      <DisplayAllEvents />
-    </MemoryRouter>
-  );
+  render(<DisplayAllEvents />);
 
   // Wait for events to load
   await waitFor(() => {
@@ -105,11 +92,7 @@ test('shows error state when API fails', async () => {
   // Mock API to reject
   mockApiGet.mockRejectedValue(new Error('Network error'));
 
-  render(
-    <MemoryRouter>
-      <DisplayAllEvents />
-    </MemoryRouter>
-  );
+  render(<DisplayAllEvents />);
 
   // Initially shows loading state
   expect(screen.getByText('Loading events...')).toBeInTheDocument();

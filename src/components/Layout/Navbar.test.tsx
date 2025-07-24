@@ -1,13 +1,8 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen } from '../../utils/testUtils';
 import Navbar from './Navbar';
-import { MemoryRouter } from 'react-router-dom';
 
 test('renders Navbar with links', () => {
-  render(
-    <MemoryRouter>
-      <Navbar />
-    </MemoryRouter>
-  );
+  render(<Navbar />);
   expect(screen.getByAltText('menu-icon')).toBeInTheDocument();
   expect(screen.getByAltText('final-logo')).toBeInTheDocument();
   expect(screen.getByAltText('user-profile')).toBeInTheDocument();

@@ -29,7 +29,7 @@ const Navbar: React.FC<NavbarProps> = ({ onSearch }) => {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
-  const handleLogout = async (): void => {
+  const handleLogout = async (): Promise<void> => {
     try {
       await logout();
       setIsDropdownOpen(false);

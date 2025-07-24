@@ -1,5 +1,15 @@
 import { env } from '../config/env';
 
+// Type definitions for performance APIs
+interface LayoutShift extends PerformanceEntry {
+  value: number;
+  hadRecentInput: boolean;
+}
+
+interface PerformanceEventTiming extends PerformanceEntry {
+  processingStart: number;
+}
+
 interface PerformanceMetric {
   name: string;
   value: number;
@@ -96,9 +106,10 @@ class PerformanceMonitor {
       // Track First Input Delay (FID)
       const fidObserver = new PerformanceObserver(list => {
         for (const entry of list.getEntries()) {
+          const fidEntry = entry as PerformanceEventTiming;
           this.recordMetric(
             'first_input_delay',
-            entry.processingStart - entry.startTime
+            fidEntry.processingStart - fidEntry.startTime
           );
         }
       });
@@ -113,8 +124,9 @@ class PerformanceMonitor {
       let clsValue = 0;
       const clsObserver = new PerformanceObserver(list => {
         for (const entry of list.getEntries()) {
-          if (!entry.hadRecentInput) {
-            clsValue += entry.value;
+          const clsEntry = entry as LayoutShift;
+          if (!clsEntry.hadRecentInput) {
+            clsValue += clsEntry.value;
           }
         }
         this.recordMetric('cumulative_layout_shift', clsValue);
